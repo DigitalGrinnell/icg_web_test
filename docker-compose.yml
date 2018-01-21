@@ -3,9 +3,12 @@ version: "2"
 services:
 
   icg_web_test:
-    image: dg:icg_web_test
+    image: icg:icg_web_test
+    environment:
+      RESOLUTION: '1920x1600x24'
     volumes:
       - ./screenshots:/screenshots
+      - ./tests:/tests
 
   portainer:
     image: portainer/portainer

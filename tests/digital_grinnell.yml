@@ -1,0 +1,54 @@
+---
+target:
+  site-description: 'Digital Grinnell'        # this name is reported as a header in the output
+  base-url: 'https://digital.grinnell.edu'    # this is the base URL for all tests
+  username: 'System Admin'                    # the username that all tests are run under
+  userpass: 'putYourPasswordHere'             # be sure to edit in username's password here!
+
+  tests:
+
+    - description: 'Test the Audio content model'                   # description of the test, for output only
+      url: '/islandora/object/grinnell:10942'                       # the address appended to base-url for this test
+      match:                                                        # list of strings to be matched in the output for a successful test
+        - '/<div id="mediaplayer">Loading JW Player...<\\/div>/'
+
+    - description: 'Test the Basic Image content model'
+      url: '/islandora/object/grinnell:10737'
+      match:
+        - '/<div class="islandora-basic-image-content">/'
+
+    - description: 'Test the Binary content model'
+      url: '/islandora/object/grinnell:10511'
+      fail: 'Need to implement Binary content model tests.'
+
+    - description: 'Test the Book content model'
+      url: '/islandora/object/grinnell:5317'
+      match:
+        - '/"islandoraInternetArchiveBookReader":\\{"book":"grinnell:5317"/'
+        - '/<div id="book-viewer">/'
+        - '/<div id="BookReader" class="islandora-internet-archive-bookreader">/'
+
+    - description: 'Test the Compound Object content model'
+      url: '/islandora/object/grinnell:5263'
+      fail: 'Need to implement Compound Object content model tests.'    # this test is undefined and will return a failure message
+
+    - description: 'Test the Large Image content model'
+      url: '/islandora/object/grinnell:5281'
+      match:
+        - '/<div class="islandora-large-image-content">/'
+        - '/id="islandora-openseadragon"/'
+        - '/\\/datastream\\/JP2/'
+
+    - description: 'Test the PDF content model'
+      url: '/islandora/object/grinnell:5272'
+      match:
+        - '/<div class="islandora-pdf-content">/'
+        - '/<iframe class="pdf"/'
+        - '/\\/datastream\\/OBJ\\/view/'
+
+    - description: 'Test the Video content model'
+      url: '/islandora/object/grinnell:4933'
+      match:
+        - '/<div class="islandora-video-content">/'
+        - '/<div id="mediaplayer">Loading JW Player...<\\/div>/'
+        - '/\\/datastream\\/MP4\\/view/'
