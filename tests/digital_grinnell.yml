@@ -52,3 +52,12 @@ target:
       match:
         - class: 'islandora-video-content'
         - id: 'mediaplayer'
+
+    - description: 'Test the Solr search feature'
+      url: '/islandora/search/dc.title%3A%28Beowulf%29'
+      match:
+        - xpath: '/html/body/div[1]/div[1]/div[2]/div[1]/div/div/div[1]/article[2]/div/div/div/div/div[2]/div/div[2]/div/dl[2]/dd[2]'
+          text: 'notes by Timothy D. Arner'
+        - xpath: '/html/body/div[1]/div[1]/div[2]/div[1]/div/div/div[2]/div/div[2]/div/div[2]/div[2]/ul[1]/li[3]/a'
+          #        [@href="/islandora/search/dc.title%3A%28Beowulf%29?islandora_solr_search_navigation=0&amp;f%5B0%5D=mods_subject_topic_ms%3A%22Epic%5C%20poetry%2C%5C%20English%5C%20%5C%28Old%5C%29%22"]'
+          text: 'Epic poetry, English (Old)'
