@@ -41,7 +41,10 @@ class c:
   UNDERLINE = '\033[4m'
 
 def run_test(info_dict):
-  print(c.OKBLUE + "Loading Firefox driver..."),
+  num_passed = 0
+  num_failed = 0
+
+  print(c.OKBLUE + "Loading Firefox driver...",)
   driver, waiter, selector, datapath = init()
   print("...done." + c.ENDC)
 
@@ -57,26 +60,63 @@ def run_test(info_dict):
     full_url = base_url + test['url']
     print(" ")
     print(c.OKBLUE + "{} ---------- ".format(description))
-    print("Fetching '{}'...".format(full_url)),
+    print("Fetching '{}'...".format(full_url),)
+
     try:
       driver.get(full_url)
       print("...done." + c.OKBLUE)
       waiter.shoot(description)
       print(c.ENDC),
+
       if 'fail' in test:
         print(c.FAIL + "!!! Test Failed !!!  {} ".format(test['fail']) + c.ENDC)
-      if 'match' in test:
-        for one_match in test['match']:
-           print(c.OKBLUE + "  Looking for '{}' in {}...".format(one_match,full_url) + c.ENDC)
+#        num_failed += 1     # Disabled because this is an expected failure.
+
+      elif 'match' in test:
+        for a_match in test['match']:
+           if 'id' in a_match:
+             print(c.OKBLUE + "  Looking for an element ID of '{0}' in {1}...".format(a_match['id'],full_url) + c.ENDC)
+             try:
+               found = driver.find_element_by_id(a_match['id']).text
+               print(c.OKGREEN + "    Element ID '{}' was found!".format(a_match['id']) + c.ENDC)
+               num_passed += 1
+               if 'text' in a_match:
+                 if a_match['text'] in found:
+                   print(c.OKGREEN + "    Element ID '{0}' includes the target text of '{1}'!".format(a_match['id'],a_match['text']) + c.ENDC)
+                   num_passed += 1
+                 else:
+                   print(c.FAIL + "    Element ID '{0}' does NOT contain target '{1}' text.".format(a_match['id'],a_match['text']) + c.ENDC)
+                   num_failed += 1
+             except:
+               print(c.FAIL + "    Element ID '{}' was NOT found.".format(a_match['id']) + c.ENDC)
+               num_failed += 1
+
+           elif 'class' in a_match:
+             print(c.OKBLUE + "  Looking for an element CLASS of '{0}' in {1}...".format(a_match['class'],full_url) + c.ENDC)
+             try:
+               found = driver.find_element_by_class_name(a_match['class']).text
+               print(c.OKGREEN + "    Element CLASS '{}' was found!".format(a_match['class']) + c.ENDC)
+               num_passed += 1
+               if 'text' in a_match:
+                 if a_match['text'] in found:
+                   print(c.OKGREEN + "    Element CLASS '{0}' includes the target text of '{1}'!".format(a_match['class'],a_match['text']) + c.ENDC)
+                   num_passed += 1
+                 else:
+                   print(c.FAIL + "    Element CLASS '{0}' does NOT contain target '{1}' text.".format(a_match['class'],a_match['text']) + c.ENDC)
+                   num_failed += 1
+             except:
+               print(c.FAIL + "    Element CLASS '{}' was NOT found.".format(a_match['class']) + c.ENDC)
+               num_failed += 1
 
     except:
       print(c.FAIL)
       print("Unexpected error:", sys.exc_info()[0])
       print(c.ENDC)
+      num_failed += 1
       raise
 
   print(c.OKBLUE + c.HEADER)
-  print("All '{}' tests are complete.".format(site_description))
+  print("All '{0}' tests are complete with {1} passed and {2} failed.".format(site_description,num_passed,num_failed))
   print(c.ENDC)
   driver.quit()
 
@@ -101,8 +141,8 @@ def parse_and_run_tests( ):
     print("Found '{}' in /tests.  Processing it now.".format(yml))
     with open(yml) as info:
       info_dict = yaml.load(info)
-      pp = pprint.PrettyPrinter(indent=2)
-      pp.pprint(info_dict)
+#      pp = pprint.PrettyPrinter(indent=2)
+#      pp.pprint(info_dict)
       run_test(info_dict)
 
 if __name__ == '__main__':
