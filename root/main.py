@@ -108,6 +108,24 @@ def run_test(info_dict):
                print(c.FAIL + "    Element CLASS '{}' was NOT found.".format(a_match['class']) + c.ENDC)
                num_failed += 1
 
+           elif 'xpath' in a_match:
+             print(c.OKBLUE + "  Looking for an element XPATH of '{0}' in {1}...".format(a_match['xpath'],full_url) + c.ENDC)
+             try:
+               found = driver.find_element_by_xpath(a_match['xpath']).text
+               print(c.OKGREEN + "    Element XPATH '{}' was found!".format(a_match['xpath']) + c.ENDC)
+               num_passed += 1
+               if 'text' in a_match:
+                 if a_match['text'] in found:
+                   print(c.OKGREEN + "    Element XPATH '{0}' includes the target text of '{1}'!".format(a_match['xpath'],a_match['text']) + c.ENDC)
+                   num_passed += 1
+                 else:
+                   print(c.FAIL + "    Element XPATH '{0}' does NOT contain target '{1}' text.".format(a_match['xpath'],a_match['text']) + c.ENDC)
+                   num_failed += 1
+             except:
+               print(c.FAIL + "    Element XPATH '{}' was NOT found.".format(a_match['xpath']) + c.ENDC)
+               num_failed += 1
+
+
     except:
       print(c.FAIL)
       print("Unexpected error:", sys.exc_info()[0])

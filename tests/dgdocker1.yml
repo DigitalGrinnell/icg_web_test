@@ -1,7 +1,7 @@
 ---
 target:
-  site-description: 'Digital Grinnell'        # this name is reported as a header in the output
-  base-url: 'https://digital.grinnell.edu'    # this is the base URL for all tests
+  site-description: 'Digital Grinnell ISLE Alpha'        # this name is reported as a header in the output
+  base-url: 'http://dgdocker1.grinnell.edu'              # this is the base URL for all tests
 
   # username: 'System Admin'                  # the username that all tests are run under
   # userpass: 'putYourPasswordHere'           # be sure to edit in username's password here!
@@ -32,8 +32,8 @@ target:
       match:
         - class: 'islandora-compound-prev-next'
           text: 'A compound of 2 objects'
-        - xpath: '/html/body/div[1]/div[1]/div[2]/div[1]/div/div/div[2]/div/div[2]/div/div/div/div/div[2]/span[@class="islandora-compound-caption"]'
-          text: 'Library Under Construction 2'
+        - class: 'islandora-compound-caption'
+          text: 'Library Under Construction 1'
 
     - description: 'Test the Large Image content model'
       url: '/islandora/object/grinnell:5281'
