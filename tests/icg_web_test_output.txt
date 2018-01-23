@@ -1,0 +1,110 @@
+----------------
+Found '/tests/libweb_error_report_form.yml' in /tests.  Processing it now.
+Loading Firefox driver... ...done.
+Begin processing tests for 'LIBWEB Error Report Form' with a base URL of 'http://libweb.grinnell.edu/scripts/bugform.php'.
+ 
+Test Problem Form from Digital Grinnell ---------- 
+Fetching 'http://libweb.grinnell.edu/scripts/bugform.php?system=2&url=https%3A%2F%2Fdigital.grinnell.edu%2Fislandora%2Fobject%2Fgrinnell%3A13909'... ...done.
+Screenshot saved at /screenshots/0-LIBWEB Error Report Form - Test Problem Form from Digital Grinnell.png
+
+  Looking for an element ID of 'websupportform' in http://libweb.grinnell.edu/scripts/bugform.php?system=2&url=https%3A%2F%2Fdigital.grinnell.edu%2Fislandora%2Fobject%2Fgrinnell%3A13909...
+    Element ID 'websupportform' was found!
+  Looking for an element XPATH of '/html/body/div/div[2]/div/div/div[3]/div/div[2]/form/div[8]/label[@for="browser"]' in http://libweb.grinnell.edu/scripts/bugform.php?system=2&url=https%3A%2F%2Fdigital.grinnell.edu%2Fislandora%2Fobject%2Fgrinnell%3A13909...
+    Element XPATH '/html/body/div/div[2]/div/div/div[3]/div/div[2]/form/div[8]/label[@for="browser"]' was found!
+    Element XPATH '/html/body/div/div[2]/div/div/div[3]/div/div[2]/form/div[8]/label[@for="browser"]' includes the target text of 'Web Browser and Operating System'!
+  Looking for an element ID of 'saveForm' in http://libweb.grinnell.edu/scripts/bugform.php?system=2&url=https%3A%2F%2Fdigital.grinnell.edu%2Fislandora%2Fobject%2Fgrinnell%3A13909...
+    Element ID 'saveForm' was found!
+
+All 'LIBWEB Error Report Form' tests are complete with 4 passed and 0 failed.
+
+----------------
+Found '/tests/digital_grinnell.yml' in /tests.  Processing it now.
+Loading Firefox driver... ...done.
+Begin processing tests for 'Digital Grinnell' with a base URL of 'https://digital.grinnell.edu'.
+ 
+Test the Audio content model ---------- 
+Fetching 'https://digital.grinnell.edu/islandora/object/grinnell:10942'... ...done.
+Screenshot saved at /screenshots/0-Digital Grinnell - Test the Audio content model.png
+
+  Looking for an element ID of 'mediaplayer' in https://digital.grinnell.edu/islandora/object/grinnell:10942...
+    Element ID 'mediaplayer' was found!
+ 
+Test the Basic Image content model ---------- 
+Fetching 'https://digital.grinnell.edu/islandora/object/grinnell:10737'... ...done.
+Screenshot saved at /screenshots/1-Digital Grinnell - Test the Basic Image content model.png
+
+  Looking for an element CLASS of 'islandora-basic-image-content' in https://digital.grinnell.edu/islandora/object/grinnell:10737...
+    Element CLASS 'islandora-basic-image-content' was found!
+ 
+Test the Binary content model ---------- 
+Fetching 'https://digital.grinnell.edu/islandora/object/grinnell:10511'... ...done.
+Screenshot saved at /screenshots/2-Digital Grinnell - Test the Binary content model.png
+
+Forced Failure!!!  Need to implement Binary content model tests. 
+ 
+Test the Book content model ---------- 
+Fetching 'https://digital.grinnell.edu/islandora/object/grinnell:5317'... ...done.
+Screenshot saved at /screenshots/3-Digital Grinnell - Test the Book content model.png
+
+  Looking for an element ID of 'BookReader' in https://digital.grinnell.edu/islandora/object/grinnell:5317...
+    Element ID 'BookReader' was found!
+ 
+Test the Compound Object content model ---------- 
+Fetching 'https://digital.grinnell.edu/islandora/object/grinnell:5263'... ...done.
+Screenshot saved at /screenshots/4-Digital Grinnell - Test the Compound Object content model.png
+
+  Looking for an element CLASS of 'islandora-compound-prev-next' in https://digital.grinnell.edu/islandora/object/grinnell:5263...
+    Element CLASS 'islandora-compound-prev-next' was found!
+    Element CLASS 'islandora-compound-prev-next' includes the target text of 'A compound of 2 objects'!
+  Looking for an element XPATH of '/html/body/div[1]/div[1]/div[2]/div[1]/div/div/div[2]/div/div[2]/div/div/div/div/div[2]/span[@class="islandora-compound-caption"]' in https://digital.grinnell.edu/islandora/object/grinnell:5263...
+    Element XPATH '/html/body/div[1]/div[1]/div[2]/div[1]/div/div/div[2]/div/div[2]/div/div/div/div/div[2]/span[@class="islandora-compound-caption"]' was found!
+    Element XPATH '/html/body/div[1]/div[1]/div[2]/div[1]/div/div/div[2]/div/div[2]/div/div/div/div/div[2]/span[@class="islandora-compound-caption"]' includes the target text of 'Library Under Construction 2'!
+ 
+Test the Large Image content model ---------- 
+Fetching 'https://digital.grinnell.edu/islandora/object/grinnell:5281'... ...done.
+Screenshot saved at /screenshots/5-Digital Grinnell - Test the Large Image content model.png
+
+  Looking for an element CLASS of 'islandora-large-image-content' in https://digital.grinnell.edu/islandora/object/grinnell:5281...
+    Element CLASS 'islandora-large-image-content' was found!
+  Looking for an element ID of 'islandora-openseadragon' in https://digital.grinnell.edu/islandora/object/grinnell:5281...
+    Element ID 'islandora-openseadragon' was found!
+ 
+Test the PDF content model ---------- 
+Fetching 'https://digital.grinnell.edu/islandora/object/grinnell:5272'... ...done.
+Screenshot saved at /screenshots/6-Digital Grinnell - Test the PDF content model.png
+
+  Looking for an element CLASS of 'islandora-pdf-content' in https://digital.grinnell.edu/islandora/object/grinnell:5272...
+    Element CLASS 'islandora-pdf-content' was found!
+  Looking for an element CLASS of 'pdf' in https://digital.grinnell.edu/islandora/object/grinnell:5272...
+    Element CLASS 'pdf' was found!
+ 
+Test the Video content model ---------- 
+Fetching 'https://digital.grinnell.edu/islandora/object/grinnell:4933'... ...done.
+Screenshot saved at /screenshots/7-Digital Grinnell - Test the Video content model.png
+
+  Looking for an element CLASS of 'islandora-video-content' in https://digital.grinnell.edu/islandora/object/grinnell:4933...
+    Element CLASS 'islandora-video-content' was found!
+  Looking for an element ID of 'mediaplayer' in https://digital.grinnell.edu/islandora/object/grinnell:4933...
+    Element ID 'mediaplayer' was found!
+ 
+Test the Solr search feature ---------- 
+Fetching 'https://digital.grinnell.edu/islandora/search/dc.title%3A%28Beowulf%29'... ...done.
+Screenshot saved at /screenshots/8-Digital Grinnell - Test the Solr search feature.png
+
+  Looking for an element XPATH of '/html/body/div[1]/div[1]/div[2]/div[1]/div/div/div[1]/article[2]/div/div/div/div/div[2]/div/div[2]/div/dl[2]/dd[2]' in https://digital.grinnell.edu/islandora/search/dc.title%3A%28Beowulf%29...
+    Element XPATH '/html/body/div[1]/div[1]/div[2]/div[1]/div/div/div[1]/article[2]/div/div/div/div/div[2]/div/div[2]/div/dl[2]/dd[2]' was found!
+    Element XPATH '/html/body/div[1]/div[1]/div[2]/div[1]/div/div/div[1]/article[2]/div/div/div/div/div[2]/div/div[2]/div/dl[2]/dd[2]' includes the target text of 'notes by Timothy D. Arner'!
+  Looking for an element XPATH of '/html/body/div[1]/div[1]/div[2]/div[1]/div/div/div[2]/div/div[2]/div/div[2]/div[2]/ul[1]/li[3]/a' in https://digital.grinnell.edu/islandora/search/dc.title%3A%28Beowulf%29...
+    Element XPATH '/html/body/div[1]/div[1]/div[2]/div[1]/div/div/div[2]/div/div[2]/div/div[2]/div[2]/ul[1]/li[3]/a' was found!
+    Element XPATH '/html/body/div[1]/div[1]/div[2]/div[1]/div/div/div[2]/div/div[2]/div/div[2]/div[2]/ul[1]/li[3]/a' includes the target text of 'Epic poetry, English (Old)'!
+ 
+This test will fail ---------- 
+Fetching 'https://digital.grinnell.edu/islandora/search/dc.title%3A%28Beowulf%29'... ...done.
+Screenshot saved at /screenshots/9-Digital Grinnell - This test will fail.png
+
+  Looking for an element XPATH of '/html/body/div[1]/div[1]/div[2]/div[1]/div/div/div[2]/div/div[2]/div/div[2]/div[2]/ul[1]/li[3]/a[@href="/islandora/search/dc.title%3A%28Beowulf%29?islandora_solr_search_navigation=0&amp;f%5B0%5D=mods_subject_topic_ms%3A%22Epic%5C%20poetry%2C%5C%20English%5C%20%5C%28Old%5C%29%22"]' in https://digital.grinnell.edu/islandora/search/dc.title%3A%28Beowulf%29...
+    Element XPATH '/html/body/div[1]/div[1]/div[2]/div[1]/div/div/div[2]/div/div[2]/div/div[2]/div[2]/ul[1]/li[3]/a[@href="/islandora/search/dc.title%3A%28Beowulf%29?islandora_solr_search_navigation=0&amp;f%5B0%5D=mods_subject_topic_ms%3A%22Epic%5C%20poetry%2C%5C%20English%5C%20%5C%28Old%5C%29%22"]' was NOT found.
+
+All 'Digital Grinnell' tests are complete with 17 passed and 1 failed.
+
+
