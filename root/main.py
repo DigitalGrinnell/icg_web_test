@@ -1,5 +1,7 @@
 from webdriver_util import init
 from selenium.webdriver.support import expected_conditions as EC   # available since 2.26.0
+import private
+
 from re import sub
 import glob
 import yaml
@@ -32,14 +34,21 @@ class Tee(object):
       f.flush( )
 
 
-def send_notification_via_gmail(t, msg):
-  if 'gmail_address' in t:
-    message = 'Subject: {}\n\n{}'.format('Failures Encountered in ICG_Web_Test', msg)
-    server = smtplib.SMTP('smtp.gmail.com', 587)
-    server.starttls( )
-    server.login(t['gmail_address'], t['gmail_password'])
-    server.sendmail(t['gmail_address'], t['gmail_address'], message)
-    server.quit( )
+def send_notification_via_smtp(m_text):
+  try:
+    private.notification_address
+    private.mailgun_smtp_login
+    private.mailgun_default_password
+  except NameError:
+    print(c.FAIL + "See /root/private.example.py if you wish to enable failure notifications via email." + c.ENDC)
+    return
+
+  message = 'Subject: {}\n\n{}'.format('Failures Encountered in ICG_Web_Test', m_text)
+  server = smtplib.SMTP('smtp.mailgun.org', 587)
+  server.starttls( )
+  server.login(private.mailgun_smtp_login, private.mailgun_default_password)
+  server.sendmail(private.mailgun_smtp_login, private.notification_address, message)
+  server.quit( )
 
 
 def clean_file( ):
@@ -52,12 +61,59 @@ def clean_file( ):
   os.remove('/tests/raw.out')
 
 
+def do_match(driver, a_match, url):
+#  pp = pprint.PrettyPrinter(indent=2)
+#  pp.pprint(a_match)
+
+  found = mtext = mtype = mattr = False
+  passed = failed = 0
+
+  for typ, attr in a_match.items( ):
+    if (typ == 'text'):
+      mtext = attr
+    else:
+      mtype = typ
+      mattr = attr
+
+    if mtype:
+      print(c.OKBLUE + "  Looking for {2} of '{0}' in {1}...".format(attr, url, mtype.upper( )) + c.ENDC)
+      try:
+        if (mtype == 'xpath'):
+          found = driver.find_element_by_xpath(mattr).text
+        elif (mtype == 'class'):
+          found = driver.find_element_by_class_name(mattr).text
+        elif (mtype == 'id'):
+          found = driver.find_element_by_id(mattr).text
+        elif (mtype == 'link'):
+          found = driver.find_element_by_partial_link_text(mattr).text
+        else:
+          print(c.FAIL + "Check your .yml file.  Match type '{}' is not supported.".format(mtype) + c.ENDC)
+          return 0,0
+      except:
+        print(c.FAIL + "    Element with {1} = '{0}' was NOT found.".format(mattr, mtype.upper( )) + c.ENDC)
+        failed += 1
+
+    if found:
+      print(c.OKGREEN + "    Element with {1} = '{0}' was found!".format(mattr, mtype.upper( )) + c.ENDC)
+      passed += 1
+
+    if found and mtext:
+      if mtext in found:
+        print(c.OKGREEN + "    Element with {2} = '{0}' contains the target text of '{1}'!".format(mattr, mtext, mtype.upper( )) + c.ENDC)
+        passed += 1
+      else:
+        print(c.FAIL + "    Element with {2} = '{0}' does NOT contain the target text of '{1}'.".format(mattr, mtext, mtype.upper( )) + c.ENDC)
+        failed += 1
+
+  return passed, failed
+
+
 def run_test(info_dict):
-  num_passed = 0
-  num_failed = 0
+  num_passed = passed = 0
+  num_failed = failed = 0
 
   print(c.OKBLUE + "Loading Firefox driver...", end=' ')
-  driver, waiter, selector, datapath = init()
+  driver, waiter, selector, datapath = init( )
   print("...done." + c.ENDC)
 
   target = info_dict['target']
@@ -82,59 +138,13 @@ def run_test(info_dict):
 
       if 'fail' in test:
         print(c.FAIL + "Forced Failure!!!  {} ".format(test['fail']) + c.ENDC)
+        num_failed += 1
 
       elif 'match' in test:
         for a_match in test['match']:
-           if 'id' in a_match:
-             print(c.OKBLUE + "  Looking for an element ID of '{0}' in {1}...".format(a_match['id'],full_url) + c.ENDC)
-             try:
-               found = driver.find_element_by_id(a_match['id']).text
-               print(c.OKGREEN + "    Element ID '{}' was found!".format(a_match['id']) + c.ENDC)
-               num_passed += 1
-               if 'text' in a_match:
-                 if a_match['text'] in found:
-                   print(c.OKGREEN + "    Element ID '{0}' includes the target text of '{1}'!".format(a_match['id'],a_match['text']) + c.ENDC)
-                   num_passed += 1
-                 else:
-                   print(c.FAIL + "    Element ID '{0}' does NOT contain target '{1}' text.".format(a_match['id'],a_match['text']) + c.ENDC)
-                   num_failed += 1
-             except:
-               print(c.FAIL + "    Element ID '{}' was NOT found.".format(a_match['id']) + c.ENDC)
-               num_failed += 1
-
-           elif 'class' in a_match:
-             print(c.OKBLUE + "  Looking for an element CLASS of '{0}' in {1}...".format(a_match['class'],full_url) + c.ENDC)
-             try:
-               found = driver.find_element_by_class_name(a_match['class']).text
-               print(c.OKGREEN + "    Element CLASS '{}' was found!".format(a_match['class']) + c.ENDC)
-               num_passed += 1
-               if 'text' in a_match:
-                 if a_match['text'] in found:
-                   print(c.OKGREEN + "    Element CLASS '{0}' includes the target text of '{1}'!".format(a_match['class'],a_match['text']) + c.ENDC)
-                   num_passed += 1
-                 else:
-                   print(c.FAIL + "    Element CLASS '{0}' does NOT contain target '{1}' text.".format(a_match['class'],a_match['text']) + c.ENDC)
-                   num_failed += 1
-             except:
-               print(c.FAIL + "    Element CLASS '{}' was NOT found.".format(a_match['class']) + c.ENDC)
-               num_failed += 1
-
-           elif 'xpath' in a_match:
-             print(c.OKBLUE + "  Looking for an element XPATH of '{0}' in {1}...".format(a_match['xpath'],full_url) + c.ENDC)
-             try:
-               found = driver.find_element_by_xpath(a_match['xpath']).text
-               print(c.OKGREEN + "    Element XPATH '{}' was found!".format(a_match['xpath']) + c.ENDC)
-               num_passed += 1
-               if 'text' in a_match:
-                 if a_match['text'] in found:
-                   print(c.OKGREEN + "    Element XPATH '{0}' includes the target text of '{1}'!".format(a_match['xpath'],a_match['text']) + c.ENDC)
-                   num_passed += 1
-                 else:
-                   print(c.FAIL + "    Element XPATH '{0}' does NOT contain target '{1}' text.".format(a_match['xpath'],a_match['text']) + c.ENDC)
-                   num_failed += 1
-             except:
-               print(c.FAIL + "    Element XPATH '{}' was NOT found.".format(a_match['xpath']) + c.ENDC)
-               num_failed += 1
+          (passed, failed) = do_match(driver, a_match, full_url)
+          num_passed += passed
+          num_failed += failed
 
     except:
       print(c.FAIL)
@@ -143,14 +153,14 @@ def run_test(info_dict):
       num_failed += 1
       raise
 
-  msg = "All '{0}' tests are complete with {1} passed and {2} failed.".format(site_description,num_passed,num_failed)
+  msg = "All '{0}' tests are complete with {1} passed and {2} failed.".format(site_description, num_passed, num_failed)
   print(c.OKBLUE + c.HEADER)
   print(msg)
   print(c.ENDC)
   driver.quit( )
 
   if num_failed > 0:
-    send_notification_via_gmail(info_dict['target'], msg)
+    send_notification_via_smtp(msg)
 
 
 def parse_and_run_tests( ):
