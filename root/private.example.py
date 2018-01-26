@@ -1,5 +1,5 @@
 # You must make a copy this file and create private.py in order for these settings to take effect.
-# Do NOT share or publish your private.py file!  Make sure it is indluced in your .gitignore file.
+# Do NOT share or publish your private.py file!  Make sure it is included in your .gitignore file.
 #
 # To take advantage of failure notifications via email you must have a working Mailgun.com SMTP server.
 # You can obtain a free "sandbox" server at https://mailgun.com.  This is required
