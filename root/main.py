@@ -10,6 +10,12 @@ import sys
 import os
 import smtplib
 
+from email import encoders
+from email.mime.base import MIMEBase
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+
+
 
 class c:
   HEADER = '\033[95m'
@@ -28,13 +34,13 @@ class Tee(object):
   def write(self, obj):
     for f in self.files:
       f.write(obj)
-      f.flush( )        # If you want the output to be visible immediately
+      f.flush( )
   def flush(self):
     for f in self.files:
       f.flush( )
 
 
-def send_notification_via_smtp(m_text):
+def send_notification_via_smtp(m_text, num_failed):
   try:
     private.notification_address
     private.mailgun_smtp_login
@@ -43,7 +49,8 @@ def send_notification_via_smtp(m_text):
     print(c.FAIL + "See /root/private.example.py if you wish to enable failure notifications via email." + c.ENDC)
     return
 
-  message = 'Subject: {}\n\n{}'.format('Failures Encountered in ICG_Web_Test', m_text)
+  ftext = "{txt}".format(txt="One Failure" if num_failed == 1 else "Failures")
+  message = 'Subject: {0} {1}\n\n{2}'.format(ftext, 'Encountered in ICG_Web_Test', m_text)
   server = smtplib.SMTP('smtp.mailgun.org', 587)
   server.starttls( )
   server.login(private.mailgun_smtp_login, private.mailgun_default_password)
@@ -51,14 +58,62 @@ def send_notification_via_smtp(m_text):
   server.quit( )
 
 
-def clean_file( ):
+def clean_file_and_dispatch_notification(total_failed, completed_tests):
+  out_file = '/tests/icg_web_test_output.txt'
+  ftext = "{txt}".format(txt="Failure" if total_failed == 1 else "Failures")
+
   with open('/tests/raw.out') as f:
     file = f.read().split('\n')
   for i in range(len(file)):
     file[i] = sub(r'\[\d*m', '', file[i])
-  with open('/tests/icg_web_test_output.txt', 'w') as f1:
+  with open(out_file, 'w') as f1:
     f1.writelines(["%s\n" % item  for item in file])
+
   os.remove('/tests/raw.out')
+
+  # Create the enclosing (outer) message
+  outer = MIMEMultipart( )
+  outer['Subject'] = "ICG Web Test: {0} {1}".format(total_failed, ftext)
+  outer['To'] = private.notification_address
+  outer['From'] = private.mailgun_smtp_login
+  outer.preamble = 'You will not see this in a MIME-aware mail reader.\n'
+  body = "ICG Web Test has checked the following files and finished with {0} {1}.\n{2}".format(total_failed, ftext.lower( ), tests)
+  body = MIMEText(body)   # convert the body to a MIME compatible string
+  outer.attach(body)      # attach it to your main message
+
+  # List of attachments
+  attachments = [out_file]
+
+  # Add the attachments to the message
+  for file in attachments:
+    try:
+        with open(file, 'rb') as fp:
+            msg = MIMEBase('application', "octet-stream")
+            msg.set_payload(fp.read())
+        encoders.encode_base64(msg)
+        msg.add_header('Content-Disposition', 'attachment', filename=os.path.basename(file))
+        outer.attach(msg)
+    except:
+        print("Unable to open one of the attachments. Error: ", sys.exc_info()[0])
+        raise
+
+  composed = outer.as_string( )
+
+  # Send the email
+  try:
+    with smtplib.SMTP('smtp.mailgun.com', 587) as s:
+      s.ehlo( )
+      s.starttls( )
+      s.ehlo( )
+      s.login(private.mailgun_smtp_login, private.mailgun_default_password)
+      s.sendmail(private.mailgun_smtp_login, private.notification_address, composed)
+      s.close( )
+    print(c.OKBLUE + "A summary email has been dispatched!" + c.ENDC)
+    print( )
+  except:
+    print(c.FAIL + "Unable to send the email. Error: " + c.ENDC, sys.exc_info()[0])
+    print( )
+    raise
 
 
 def do_match(driver, a_match, url):
@@ -71,6 +126,7 @@ def do_match(driver, a_match, url):
   for typ, attr in a_match.items( ):
     if (typ == 'text'):
       mtext = attr
+      mtype = False
     else:
       mtype = typ
       mattr = attr
@@ -79,13 +135,15 @@ def do_match(driver, a_match, url):
       print(c.OKBLUE + "  Looking for {2} of '{0}' in {1}...".format(attr, url, mtype.upper( )) + c.ENDC)
       try:
         if (mtype == 'xpath'):
-          found = driver.find_element_by_xpath(mattr).text
+          found = driver.find_element_by_xpath(mattr)
         elif (mtype == 'class'):
-          found = driver.find_element_by_class_name(mattr).text
+          found = driver.find_element_by_class_name(mattr)
         elif (mtype == 'id'):
-          found = driver.find_element_by_id(mattr).text
+          found = driver.find_element_by_id(mattr)
         elif (mtype == 'link'):
-          found = driver.find_element_by_partial_link_text(mattr).text
+          found = driver.find_element_by_partial_link_text(mattr)
+        elif (mtype == 'selector'):
+          found = driver.find_element_by_css_selector(mattr)
         else:
           print(c.FAIL + "Check your .yml file.  Match type '{}' is not supported.".format(mtype) + c.ENDC)
           return 0,0
@@ -93,12 +151,12 @@ def do_match(driver, a_match, url):
         print(c.FAIL + "    Element with {1} = '{0}' was NOT found.".format(mattr, mtype.upper( )) + c.ENDC)
         failed += 1
 
-    if found:
+    if mtype and found:
       print(c.OKGREEN + "    Element with {1} = '{0}' was found!".format(mattr, mtype.upper( )) + c.ENDC)
       passed += 1
 
     if found and mtext:
-      if mtext in found:
+      if mtext in found.text:
         print(c.OKGREEN + "    Element with {2} = '{0}' contains the target text of '{1}'!".format(mattr, mtext, mtype.upper( )) + c.ENDC)
         passed += 1
       else:
@@ -160,10 +218,15 @@ def run_test(info_dict):
   driver.quit( )
 
   if num_failed > 0:
-    send_notification_via_smtp(msg)
+    send_notification_via_smtp(msg, num_failed)
+
+  return num_failed
 
 
 def parse_and_run_tests( ):
+  total_failed = 0
+  tests = ''
+
   files = glob.glob('/tests/*.yml')
   f = open('/tests/raw.out', 'w')
   original = sys.stdout
@@ -172,13 +235,19 @@ def parse_and_run_tests( ):
   for yml in files:
     print("----------------")
     print("Found '{}' in /tests.  Processing it now.".format(yml))
+    tests += '\n\t{}'.format(yml)
+
     with open(yml) as info:
       info_dict = yaml.load(info)
 #      pp = pprint.PrettyPrinter(indent=2)
 #      pp.pprint(info_dict)
-      run_test(info_dict)
+      total_failed += run_test(info_dict)
 
+  return total_failed, tests.strip(', ')
+
+
+# ------------------------------------------------------
 
 if __name__ == '__main__':
-  parse_and_run_tests( )
-  clean_file( )
+  (total_failed, tests) = parse_and_run_tests( )
+  clean_file_and_dispatch_notification(total_failed, tests)
