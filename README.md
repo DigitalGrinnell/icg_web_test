@@ -1,6 +1,6 @@
 # icg_web_test 
 
-This tool is based on work found in weihanwang/webdriver-python.  My copy resides in a fork at https://github.com/DigitalGrinnell/icg_web_test and you are certainly welcome to clone or fork this repo and give it a try.  There is much room for improvement in the code and in the Dockerization too.  The process I use to test elements of https://digital.grinnell.edu, as well as Grinnell's ISLE "Alpha" server, and elements of our LIBWEB server. To run the tool on any platform with Docker and git installed…
+This tool is based on work found in weihanwang/webdriver-python.  My copy resides in a fork at https://github.com/DigitalGrinnell/icg_web_test and you are certainly welcome to clone or fork this repo and give it a try.  There is much room for improvement in the code and in the Dockerization too.  Personally, I use this app for functional/regression testing of https://digital.grinnell.edu, as well as Grinnell's ISLE "Alpha" server, and elements of our LIBWEB server. You can spin-up the tool on any platform with Docker and git installed as so…
 
 ~~~
 git clone https://github.com/DigitalGrinnell/icg_web_test.git
@@ -13,9 +13,9 @@ You should see some output in your terminal window as the tests run against Digi
 
 If you would like to create tests of your own just make a copy of ./tests/digital_grinnell.yml and give your copy a different name.  The name can be anything you like, but the .yml extension is required and it must reside in the ./tests folder.  Edit your .yml file using my file as a guide.  It should be pretty self-explanatory.  If you leave my digital_grinnell.yml file in place it “should” run both my tests AND yours.  The code should run as many .yml test suites as it finds in ./tests.
 
-This early version of the tool uses a Firefox browser and should create screenshot .png files in the ./screenshots folder.  If find these images to be very helpful too.
+This early version of the tool uses a Firefox browser and should create screenshot .png files in the ./screenshots folder.  I find these images to be very helpful too.
 
-The README.md contents of weihanwang's origial webdriver-python tool appears below without edits.
+The README.md contents of weihanwang's origial webdriver-python tool appears in its original form below.
 
 
 # webdriver-python
