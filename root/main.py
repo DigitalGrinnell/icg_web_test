@@ -120,48 +120,48 @@ def do_match(driver, a_match, url):
 #  pp = pprint.PrettyPrinter(indent=2)
 #  pp.pprint(a_match)
 
-  found = mtext = mtype = mattr = False
   passed = failed = 0
 
-  for typ, attr in a_match.items( ):
-    if (typ == 'text'):
-      mtext = attr
-      mtype = False
+  for mtyp, mattr in a_match.items( ):
+    typ = mtyp
+    if isinstance(mattr, dict):
+      attr = mattr['attr']
+      txt = mattr['text']
     else:
-      mtype = typ
-      mattr = attr
+      attr = mattr
+      txt = False
 
-    if mtype:
-      print(c.OKBLUE + "  Looking for {2} of '{0}' in {1}...".format(attr, url, mtype.upper( )) + c.ENDC)
-      try:
-        if (mtype == 'xpath'):
-          found = driver.find_element_by_xpath(mattr)
-        elif (mtype == 'class'):
-          found = driver.find_element_by_class_name(mattr)
-        elif (mtype == 'id'):
-          found = driver.find_element_by_id(mattr)
-        elif (mtype == 'link'):
-          found = driver.find_element_by_partial_link_text(mattr)
-        elif (mtype == 'selector'):
-          found = driver.find_element_by_css_selector(mattr)
-        else:
-          print(c.FAIL + "Check your .yml file.  Match type '{}' is not supported.".format(mtype) + c.ENDC)
-          return 0,0
-      except:
-        print(c.FAIL + "    Element with {1} = '{0}' was NOT found.".format(mattr, mtype.upper( )) + c.ENDC)
-        failed += 1
+    print(c.OKBLUE + "  Looking for {2} of '{0}' in {1}...".format(attr, url, typ.upper( )) + c.ENDC)
+    found = False
 
-    if mtype and found:
-      print(c.OKGREEN + "    Element with {1} = '{0}' was found!".format(mattr, mtype.upper( )) + c.ENDC)
-      passed += 1
-
-    if found and mtext:
-      if mtext in found.text:
-        print(c.OKGREEN + "    Element with {2} = '{0}' contains the target text of '{1}'!".format(mattr, mtext, mtype.upper( )) + c.ENDC)
-        passed += 1
+    try:
+      if (typ == 'xpath'):
+        found = driver.find_element_by_xpath(attr)
+      elif (typ == 'class'):
+        found = driver.find_element_by_class_name(attr)
+      elif (typ == 'id'):
+        found = driver.find_element_by_id(attr)
+      elif (typ == 'link'):
+        found = driver.find_element_by_partial_link_text(attr)
+      elif (typ == 'selector'):
+        found = driver.find_element_by_css_selector(attr)
       else:
-        print(c.FAIL + "    Element with {2} = '{0}' does NOT contain the target text of '{1}'.".format(mattr, mtext, mtype.upper( )) + c.ENDC)
-        failed += 1
+        print(c.FAIL + "Check your .yml file.  Match type '{}' is not supported.".format(typ) + c.ENDC)
+        return 0,0
+    except:
+      print(c.FAIL + "    Element with {1} = '{0}' was NOT found.".format(attr, typ.upper( )) + c.ENDC)
+      failed += 1
+
+    if found:
+      print(c.OKGREEN + "    Element with {1} = '{0}' was found!".format(attr, typ.upper( )) + c.ENDC)
+      passed += 1
+      if txt:
+        if txt in found.text:
+          print(c.OKGREEN + "    Element with {2} = '{0}' contains the target text of '{1}'!".format(attr, txt, typ.upper( )) + c.ENDC)
+          passed += 1
+        else:
+          print(c.FAIL + "    Element with {2} = '{0}' does NOT contain the target text of '{1}'.".format(attr, txt, typ.upper( )) + c.ENDC)
+          failed += 1
 
   return passed, failed
 
