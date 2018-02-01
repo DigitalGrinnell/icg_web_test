@@ -126,7 +126,7 @@ target:
         - link: 'Early College History'
         - link: 'G. W. Cook Correspondence, 1857-1860'
         - link: 'Grinnell College Buildings'
-        - link: 'Grinnell In China'
+#        - link: 'Grinnell In China'            Not yet visible to all.
         - link: 'Historic Iowa Postcards'
         - link: 'Jimmy Ley Collection'
         - link: 'Kleinschmidt Architectural History'
@@ -168,7 +168,7 @@ target:
         - class:
             attr: 'collection-banner-text'
             text: "Since its very earliest days, the faculty, students and staff of Grinnell College have been committed to the cause of social justice, a tradition that can be traced backed to the abolitionist views of the College's founders."
-        - link: 'John Brown photograph'
+        - link: 'John Brown Photograph'
         - link: "John Brown's route across Iowa"
         - class:
             attr: 'awstats'

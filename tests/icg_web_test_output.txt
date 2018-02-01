@@ -1,252 +1,5 @@
 ----------------
 Found '/tests/digital_grinnell.yml' in /tests.  Processing it now.
-{ 'target': { 'base-url': 'https://digital.grinnell.edu',
-              'site-description': 'Digital Grinnell',
-              'tests': [ { 'description': 'Test the Audio content model',
-                           'match': [{'id': 'mediaplayer'}],
-                           'url': '/islandora/object/grinnell:10942'},
-                         { 'description': 'Test the Basic Image content model',
-                           'match': [ { 'class': 'islandora-basic-image-content'}],
-                           'url': '/islandora/object/grinnell:10737'},
-                         { 'description': 'Test the Binary content model',
-                           'match': [ { 'link': 'A Data Set of Annotated '
-                                                'Historical Maps'}],
-                           'url': '/islandora/object/grinnell:3246'},
-                         { 'description': 'Test the Book content model',
-                           'match': [{'id': 'BookReader'}],
-                           'url': '/islandora/object/grinnell:5317'},
-                         { 'description': 'Test the Compound Object content '
-                                          'model',
-                           'match': [ { 'class': { 'attr': 'islandora-compound-prev-next',
-                                                   'text': 'A compound of 2 '
-                                                           'objects'}},
-                                      { 'xpath': { 'attr': '/html/body/div[1]/div[1]/div[2]/div[1]/div/div/div[2]/div/div[2]/div/div/div/div/div[2]/span[@class="islandora-compound-caption"]',
-                                                   'text': 'Library Under '
-                                                           'Construction 2'}}],
-                           'url': '/islandora/object/grinnell:5263'},
-                         { 'description': 'Test the Large Image content model',
-                           'match': [ { 'class': 'islandora-large-image-content'},
-                                      {'id': 'islandora-openseadragon'}],
-                           'url': '/islandora/object/grinnell:5281'},
-                         { 'description': 'Test the PDF content model',
-                           'match': [ {'class': 'islandora-pdf-content'},
-                                      {'class': 'pdf'}],
-                           'url': '/islandora/object/grinnell:5272'},
-                         { 'description': 'Test the Video content model',
-                           'match': [ {'class': 'islandora-video-content'},
-                                      {'id': 'mediaplayer'}],
-                           'url': '/islandora/object/grinnell:4933'},
-                         { 'description': 'Test the Oral Histories content '
-                                          'model',
-                           'match': [ {'class': 'vjs-text-track-display'},
-                                      {'id': 'tiers-1'},
-                                      { 'id': 'islandora_webform_object_tag_links'}],
-                           'url': '/islandora/object/grinnell:19396'},
-                         { 'description': 'Test the Solr search feature',
-                           'match': [ { 'xpath': { 'attr': '/html/body/div[1]/div[1]/div[2]/div[1]/div/div/div[1]/article[2]/div/div/div/div/div[2]/div/div[2]/div/dl[2]/dd[2]',
-                                                   'text': 'notes by Timothy '
-                                                           'D. Arner'}},
-                                      {'link': 'Epic poetry, English (Old)'}],
-                           'url': '/islandora/search/dc.title%3A%28Beowulf%29'},
-                         { 'description': 'Test for our custom buttons',
-                           'match': [ {'link': 'Download'},
-                                      {'selector': 'a#dg_annotation_button'},
-                                      {'selector': 'a#dg_coversheet_button'},
-                                      { 'xpath': '/html/body/div[1]/div[1]/div[2]/div[1]/div/div/div[1]/article[2]/div/ul/li[3]/a'},
-                                      { 'xpath': '/html/body/div[1]/div[1]/div[2]/div[1]/div/div/div[1]/article[2]/div/ul/li[4]/a'}],
-                           'url': '/islandora/object/grinnell:10470'},
-                         { 'description': 'Test for custom Solr search options',
-                           'match': [ { 'xpath': { 'attr': '/html/body/div[1]/div[1]/div[2]/div[1]/div/div/div[2]/div/div/div/div[2]/form/div/div[1]/div/div[1]/select/option[3]',
-                                                   'text': 'Artist'}}],
-                           'url': '/islandora/object/grinnell:faulconer'},
-                         { 'description': 'Test for all top-level collections',
-                           'match': [ { 'class': { 'attr': 'collection-banner-text',
-                                                   'text': 'the preservation '
-                                                           'and publication of '
-                                                           'scholarship '
-                                                           'created by '
-                                                           'Grinnell College '
-                                                           'students, faculty, '
-                                                           'and staff, as well '
-                                                           'as selected '
-                                                           'material that '
-                                                           'illuminates the '
-                                                           'College'}},
-                                      {'link': 'Scholarship at Grinnell'},
-                                      { 'link': 'Special Collections and '
-                                                'Archives'},
-                                      {'link': 'Faulconer Art'},
-                                      { 'link': 'Grinnell College Campus '
-                                                'Collections'},
-                                      {'link': 'Social Justice at Grinnell'},
-                                      { 'link': 'Poweshiek History '
-                                                'Preservation Project'},
-                                      {'link': 'Alumni Oral Histories'}],
-                           'url': '/'},
-                         { 'description': "Test for 'Scholarship at Grinnell' "
-                                          'sub-collections',
-                           'match': [ { 'class': { 'attr': 'collection-banner-text',
-                                                   'text': 'Publications, '
-                                                           'research papers '
-                                                           'and posters, '
-                                                           'performance '
-                                                           'programs, and '
-                                                           'other materials'}},
-                                      {'link': 'Student Scholarship'},
-                                      {'link': 'Faculty Scholarship'},
-                                      { 'link': 'Syllabi and Curricular '
-                                                'Materials'},
-                                      { 'class': { 'attr': 'awstats',
-                                                   'text': 'This content, '
-                                                           'grinnell:scholarship, '
-                                                           'has been '
-                                                           'visited'}}],
-                           'url': '/islandora/object/grinnell:scholarship'},
-                         { 'description': "Test for 'Special Collections and "
-                                          "Archives' sub-collections",
-                           'match': [ { 'class': { 'attr': 'collection-banner-text',
-                                                   'text': 'Special '
-                                                           'Collections and '
-                                                           'Archives, '
-                                                           'including '
-                                                           'photographs, '
-                                                           'letters, and '
-                                                           'documents.'}},
-                                      {'link': 'Early College History'},
-                                      { 'link': 'G. W. Cook Correspondence, '
-                                                '1857-1860'},
-                                      {'link': 'Grinnell College Buildings'},
-                                      {'link': 'Grinnell In China'},
-                                      {'link': 'Historic Iowa Postcards'},
-                                      {'link': 'Jimmy Ley Collection'},
-                                      { 'link': 'Kleinschmidt Architectural '
-                                                'History'},
-                                      {'link': 'Life at Grinnell College'},
-                                      {'link': 'Social Gospel'},
-                                      {'link': 'College Handbooks'},
-                                      { 'class': { 'attr': 'awstats',
-                                                   'text': 'This content, '
-                                                           'grinnell:special-collections, '
-                                                           'has been '
-                                                           'visited'}}],
-                           'url': '/islandora/object/grinnell:special-collections'},
-                         { 'description': "Test for 'Faulconer Art' "
-                                          'sub-collections',
-                           'match': [ { 'class': { 'attr': 'collection-banner-text',
-                                                   'text': 'The Faulconer '
-                                                           'Gallery, Grinnell '
-                                                           'College Art '
-                                                           'Collection '
-                                                           'includes over 4000 '
-                                                           'works of art, '
-                                                           'featuring works on '
-                                                           'paper (prints, '
-                                                           'drawings, and '
-                                                           'photographs), many '
-                                                           'in portfolios.'}},
-                                      {'link': 'Recent Acquisitions'},
-                                      {'link': 'Soviet Graphic Art'},
-                                      { 'link': 'Call a Wrecking Ball to Make '
-                                                'a Window'},
-                                      { 'class': { 'attr': 'awstats',
-                                                   'text': 'This content, '
-                                                           'grinnell:faulconer, '
-                                                           'has been '
-                                                           'visited'}}],
-                           'url': '/islandora/object/grinnell:faulconer'},
-                         { 'description': "Test for 'Grinnell College Campus "
-                                          "Collections' sub-collections",
-                           'match': [ { 'class': { 'attr': 'collection-banner-text',
-                                                   'text': 'Primary source '
-                                                           'materials from '
-                                                           'collections across '
-                                                           'campus.'}},
-                                      {'link': 'Ancient Coins'},
-                                      { 'link': 'Grinnell College Geology '
-                                                'Collection'},
-                                      { 'class': { 'attr': 'awstats',
-                                                   'text': 'This content, '
-                                                           'grinnell:campus-collections, '
-                                                           'has been '
-                                                           'visited'}}],
-                           'url': '/islandora/object/grinnell:campus-collections'},
-                         { 'description': "Test for 'Social Justice at "
-                                          "Grinnell' collection",
-                           'match': [ { 'class': { 'attr': 'collection-banner-text',
-                                                   'text': 'Since its very '
-                                                           'earliest days, the '
-                                                           'faculty, students '
-                                                           'and staff of '
-                                                           'Grinnell College '
-                                                           'have been '
-                                                           'committed to the '
-                                                           'cause of social '
-                                                           'justice, a '
-                                                           'tradition that can '
-                                                           'be traced backed '
-                                                           'to the '
-                                                           'abolitionist views '
-                                                           "of the College's "
-                                                           'founders.'}},
-                                      {'link': 'John Brown photograph'},
-                                      { 'link': "John Brown's route across "
-                                                'Iowa'},
-                                      { 'class': { 'attr': 'awstats',
-                                                   'text': 'This content, '
-                                                           'grinnell:social-justice, '
-                                                           'has been '
-                                                           'visited'}}],
-                           'url': '/islandora/object/grinnell:social-justice'},
-                         { 'description': "Test for 'Poweshiek History "
-                                          "Preservation Project' collection",
-                           'match': [ { 'class': { 'attr': 'collection-banner-text',
-                                                   'text': 'PHPP is a digital '
-                                                           'archive of the '
-                                                           'Poweshiek County '
-                                                           'area that includes '
-                                                           'materials '
-                                                           'contributed by '
-                                                           'individuals and '
-                                                           'items from the '
-                                                           'Drake Community '
-                                                           'Library, Grinnell '
-                                                           'College and area '
-                                                           'historical '
-                                                           'museums.'}},
-                                      { 'link': 'William Steele Sanders at Age '
-                                                '2'},
-                                      {'link': 'Grinnell Train Depot'},
-                                      { 'class': { 'attr': 'awstats',
-                                                   'text': 'This content, '
-                                                           'grinnell:phpp, has '
-                                                           'been visited'}}],
-                           'url': '/islandora/object/grinnell:phpp'},
-                         { 'description': "Test for 'Alumni Oral Histories' "
-                                          'collection',
-                           'match': [ { 'class': { 'attr': 'collection-banner-text',
-                                                   'text': 'The Alumni Oral '
-                                                           'History Project '
-                                                           'aims to better '
-                                                           'understand and '
-                                                           'share the history '
-                                                           'of Grinnell '
-                                                           'College by '
-                                                           'recording and '
-                                                           'preserving oral '
-                                                           'histories with '
-                                                           'members of the '
-                                                           'Grinnell College '
-                                                           'alumni '
-                                                           'community.'}},
-                                      { 'link': 'Audrey (Bunny) Howard Swanson '
-                                                "'43"},
-                                      {'link': "David Durand '62"},
-                                      { 'class': { 'attr': 'awstats',
-                                                   'text': 'This content, '
-                                                           'grinnell:alumni-oral-histories, '
-                                                           'has been '
-                                                           'visited'}}],
-                           'url': '/islandora/object/grinnell:alumni-oral-histories'}]}}
 Loading Firefox driver... ...done.
 Begin processing tests for 'Digital Grinnell' with a base URL of 'https://digital.grinnell.edu'.
  
@@ -387,7 +140,8 @@ Fetching 'https://digital.grinnell.edu/islandora/object/grinnell:scholarship'...
 Screenshot saved at /screenshots/13-Digital Grinnell - Test for 'Scholarship at Grinnell' sub-collections.png
 
   Looking for CLASS of 'collection-banner-text' in https://digital.grinnell.edu/islandora/object/grinnell:scholarship...
-    Element with CLASS = 'collection-banner-text' was NOT found.
+    Element with CLASS = 'collection-banner-text' was found!
+    Element with CLASS = 'collection-banner-text' contains the target text of 'Publications, research papers and posters, performance programs, and other materials'!
   Looking for LINK of 'Student Scholarship' in https://digital.grinnell.edu/islandora/object/grinnell:scholarship...
     Element with LINK = 'Student Scholarship' was found!
   Looking for LINK of 'Faculty Scholarship' in https://digital.grinnell.edu/islandora/object/grinnell:scholarship...
@@ -403,15 +157,14 @@ Fetching 'https://digital.grinnell.edu/islandora/object/grinnell:special-collect
 Screenshot saved at /screenshots/14-Digital Grinnell - Test for 'Special Collections and Archives' sub-collections.png
 
   Looking for CLASS of 'collection-banner-text' in https://digital.grinnell.edu/islandora/object/grinnell:special-collections...
-    Element with CLASS = 'collection-banner-text' was NOT found.
+    Element with CLASS = 'collection-banner-text' was found!
+    Element with CLASS = 'collection-banner-text' contains the target text of 'Special Collections and Archives, including photographs, letters, and documents.'!
   Looking for LINK of 'Early College History' in https://digital.grinnell.edu/islandora/object/grinnell:special-collections...
     Element with LINK = 'Early College History' was found!
   Looking for LINK of 'G. W. Cook Correspondence, 1857-1860' in https://digital.grinnell.edu/islandora/object/grinnell:special-collections...
     Element with LINK = 'G. W. Cook Correspondence, 1857-1860' was found!
   Looking for LINK of 'Grinnell College Buildings' in https://digital.grinnell.edu/islandora/object/grinnell:special-collections...
     Element with LINK = 'Grinnell College Buildings' was found!
-  Looking for LINK of 'Grinnell In China' in https://digital.grinnell.edu/islandora/object/grinnell:special-collections...
-    Element with LINK = 'Grinnell In China' was NOT found.
   Looking for LINK of 'Historic Iowa Postcards' in https://digital.grinnell.edu/islandora/object/grinnell:special-collections...
     Element with LINK = 'Historic Iowa Postcards' was found!
   Looking for LINK of 'Jimmy Ley Collection' in https://digital.grinnell.edu/islandora/object/grinnell:special-collections...
@@ -433,7 +186,8 @@ Fetching 'https://digital.grinnell.edu/islandora/object/grinnell:faulconer'... .
 Screenshot saved at /screenshots/15-Digital Grinnell - Test for 'Faulconer Art' sub-collections.png
 
   Looking for CLASS of 'collection-banner-text' in https://digital.grinnell.edu/islandora/object/grinnell:faulconer...
-    Element with CLASS = 'collection-banner-text' was NOT found.
+    Element with CLASS = 'collection-banner-text' was found!
+    Element with CLASS = 'collection-banner-text' contains the target text of 'The Faulconer Gallery, Grinnell College Art Collection includes over 4000 works of art, featuring works on paper (prints, drawings, and photographs), many in portfolios.'!
   Looking for LINK of 'Recent Acquisitions' in https://digital.grinnell.edu/islandora/object/grinnell:faulconer...
     Element with LINK = 'Recent Acquisitions' was found!
   Looking for LINK of 'Soviet Graphic Art' in https://digital.grinnell.edu/islandora/object/grinnell:faulconer...
@@ -449,7 +203,8 @@ Fetching 'https://digital.grinnell.edu/islandora/object/grinnell:campus-collecti
 Screenshot saved at /screenshots/16-Digital Grinnell - Test for 'Grinnell College Campus Collections' sub-collections.png
 
   Looking for CLASS of 'collection-banner-text' in https://digital.grinnell.edu/islandora/object/grinnell:campus-collections...
-    Element with CLASS = 'collection-banner-text' was NOT found.
+    Element with CLASS = 'collection-banner-text' was found!
+    Element with CLASS = 'collection-banner-text' contains the target text of 'Primary source materials from collections across campus.'!
   Looking for LINK of 'Ancient Coins' in https://digital.grinnell.edu/islandora/object/grinnell:campus-collections...
     Element with LINK = 'Ancient Coins' was found!
   Looking for LINK of 'Grinnell College Geology Collection' in https://digital.grinnell.edu/islandora/object/grinnell:campus-collections...
@@ -463,9 +218,10 @@ Fetching 'https://digital.grinnell.edu/islandora/object/grinnell:social-justice'
 Screenshot saved at /screenshots/17-Digital Grinnell - Test for 'Social Justice at Grinnell' collection.png
 
   Looking for CLASS of 'collection-banner-text' in https://digital.grinnell.edu/islandora/object/grinnell:social-justice...
-    Element with CLASS = 'collection-banner-text' was NOT found.
-  Looking for LINK of 'John Brown photograph' in https://digital.grinnell.edu/islandora/object/grinnell:social-justice...
-    Element with LINK = 'John Brown photograph' was NOT found.
+    Element with CLASS = 'collection-banner-text' was found!
+    Element with CLASS = 'collection-banner-text' contains the target text of 'Since its very earliest days, the faculty, students and staff of Grinnell College have been committed to the cause of social justice, a tradition that can be traced backed to the abolitionist views of the College's founders.'!
+  Looking for LINK of 'John Brown Photograph' in https://digital.grinnell.edu/islandora/object/grinnell:social-justice...
+    Element with LINK = 'John Brown Photograph' was found!
   Looking for LINK of 'John Brown's route across Iowa' in https://digital.grinnell.edu/islandora/object/grinnell:social-justice...
     Element with LINK = 'John Brown's route across Iowa' was found!
   Looking for CLASS of 'awstats' in https://digital.grinnell.edu/islandora/object/grinnell:social-justice...
@@ -477,7 +233,8 @@ Fetching 'https://digital.grinnell.edu/islandora/object/grinnell:phpp'... ...don
 Screenshot saved at /screenshots/18-Digital Grinnell - Test for 'Poweshiek History Preservation Project' collection.png
 
   Looking for CLASS of 'collection-banner-text' in https://digital.grinnell.edu/islandora/object/grinnell:phpp...
-    Element with CLASS = 'collection-banner-text' was NOT found.
+    Element with CLASS = 'collection-banner-text' was found!
+    Element with CLASS = 'collection-banner-text' contains the target text of 'PHPP is a digital archive of the Poweshiek County area that includes materials contributed by individuals and items from the Drake Community Library, Grinnell College and area historical museums.'!
   Looking for LINK of 'William Steele Sanders at Age 2' in https://digital.grinnell.edu/islandora/object/grinnell:phpp...
     Element with LINK = 'William Steele Sanders at Age 2' was found!
   Looking for LINK of 'Grinnell Train Depot' in https://digital.grinnell.edu/islandora/object/grinnell:phpp...
@@ -491,7 +248,8 @@ Fetching 'https://digital.grinnell.edu/islandora/object/grinnell:alumni-oral-his
 Screenshot saved at /screenshots/19-Digital Grinnell - Test for 'Alumni Oral Histories' collection.png
 
   Looking for CLASS of 'collection-banner-text' in https://digital.grinnell.edu/islandora/object/grinnell:alumni-oral-histories...
-    Element with CLASS = 'collection-banner-text' was NOT found.
+    Element with CLASS = 'collection-banner-text' was found!
+    Element with CLASS = 'collection-banner-text' contains the target text of 'The Alumni Oral History Project aims to better understand and share the history of Grinnell College by recording and preserving oral histories with members of the Grinnell College alumni community.'!
   Looking for LINK of 'Audrey (Bunny) Howard Swanson '43' in https://digital.grinnell.edu/islandora/object/grinnell:alumni-oral-histories...
     Element with LINK = 'Audrey (Bunny) Howard Swanson '43' was found!
   Looking for LINK of 'David Durand '62' in https://digital.grinnell.edu/islandora/object/grinnell:alumni-oral-histories...
@@ -500,20 +258,10 @@ Screenshot saved at /screenshots/19-Digital Grinnell - Test for 'Alumni Oral His
     Element with CLASS = 'awstats' was found!
     Element with CLASS = 'awstats' contains the target text of 'This content, grinnell:alumni-oral-histories, has been visited'!
 
-All 'Digital Grinnell' tests are complete with 72 passed and 9 failed.
+All 'Digital Grinnell' tests are complete with 87 passed and 0 failed.
 
 ----------------
 Found '/tests/libweb_error_report_form.yml' in /tests.  Processing it now.
-{ 'target': { 'base-url': 'http://libweb.grinnell.edu/scripts/bugform.php',
-              'site-description': 'LIBWEB Error Report Form',
-              'tests': [ { 'description': 'Test Problem Form from Digital '
-                                          'Grinnell',
-                           'match': [ {'id': 'websupportform'},
-                                      { 'xpath': { 'attr': '/html/body/div/div[2]/div/div/div[3]/div/div[2]/form/div[8]/label[@for="browser"]',
-                                                   'text': 'Web Browser and '
-                                                           'Operating System'}},
-                                      {'id': 'saveForm'}],
-                           'url': '?system=2&url=https%3A%2F%2Fdigital.grinnell.edu%2Fislandora%2Fobject%2Fgrinnell%3A13909'}]}}
 Loading Firefox driver... ...done.
 Begin processing tests for 'LIBWEB Error Report Form' with a base URL of 'http://libweb.grinnell.edu/scripts/bugform.php'.
  
@@ -527,8 +275,8 @@ Screenshot saved at /screenshots/0-LIBWEB Error Report Form - Test Problem Form 
     Element with XPATH = '/html/body/div/div[2]/div/div/div[3]/div/div[2]/form/div[8]/label[@for="browser"]' was found!
     Element with XPATH = '/html/body/div/div[2]/div/div/div[3]/div/div[2]/form/div[8]/label[@for="browser"]' contains the target text of 'Web Browser and Operating System'!
   Looking for ID of 'saveForm' in http://libweb.grinnell.edu/scripts/bugform.php?system=2&url=https%3A%2F%2Fdigital.grinnell.edu%2Fislandora%2Fobject%2Fgrinnell%3A13909...
-    Element with ID = 'saveForm' was NOT found.
+    Element with ID = 'saveForm' was found!
 
-All 'LIBWEB Error Report Form' tests are complete with 3 passed and 1 failed.
+All 'LIBWEB Error Report Form' tests are complete with 4 passed and 0 failed.
 
 
