@@ -54,7 +54,8 @@ def send_notification_via_smtp(m_text, num_failed):
   server = smtplib.SMTP('smtp.mailgun.org', 587)
   server.starttls( )
   server.login(private.mailgun_smtp_login, private.mailgun_default_password)
-  server.sendmail(private.mailgun_smtp_login, private.notification_address, message)
+  for a in private.notification_address.split(','):
+    server.sendmail(private.mailgun_smtp_login, a.strip( ), message)
   server.quit( )
 
 
