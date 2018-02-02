@@ -1,7 +1,15 @@
 ---
 target:
-  site-description: 'Digital Grinnell'           # this name is reported as a header in the output
-  base-url: 'https://digital.grinnell.edu'       # this is the base URL for all tests
+  site-description: 'Digital Grinnell - Public'   # this name is reported as a header in the output
+  base-url: 'https://digital.grinnell.edu'            # this is the base URL for all tests
+
+# These tests run without login so 'aunthentication' is NOT defined
+#  authentication:                                     # if present, the following 4 fields are required
+#    login-url: '/user/login'       # the address appended to base-url for authentication
+#    username: 'System Admin'       # the username supplied to the user-input-id field
+#    user-input-id: 'edit-name'     # id of the input field for username
+#    pass-input-id: 'edit-pass'     # id of the input field for private.password
+#    form-id: 'user-login'          # id of the form holding user-input-id and pass-input-id inputs
 
   tests:
 
@@ -126,7 +134,7 @@ target:
         - link: 'Early College History'
         - link: 'G. W. Cook Correspondence, 1857-1860'
         - link: 'Grinnell College Buildings'
-#        - link: 'Grinnell In China'            Not yet visible to all.
+#        - link: 'Grinnell In China'          #  Not yet visible to the public.
         - link: 'Historic Iowa Postcards'
         - link: 'Jimmy Ley Collection'
         - link: 'Kleinschmidt Architectural History'

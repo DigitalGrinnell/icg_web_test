@@ -1,50 +1,51 @@
 ----------------
 Found '/tests/digital_grinnell.yml' in /tests.  Processing it now.
 Loading Firefox driver... ...done.
-Begin processing tests for 'Digital Grinnell' with a base URL of 'https://digital.grinnell.edu'.
+Authentication as 'System Admin' at https://digital.grinnell.edu/user/login... ...successful.
+
+Begin processing tests for 'Digital Grinnell - Admin User' with a base URL of 'https://digital.grinnell.edu'.
  
 Test the Audio content model ---------- 
 Fetching 'https://digital.grinnell.edu/islandora/object/grinnell:10942'... ...done.
-Screenshot saved at /screenshots/0-Digital Grinnell - Test the Audio content model.png
+Screenshot saved at /screenshots/0-Digital Grinnell - Admin User - Test the Audio content model.png
 
   Looking for ID of 'mediaplayer' in https://digital.grinnell.edu/islandora/object/grinnell:10942...
     Element with ID = 'mediaplayer' was found!
  
 Test the Basic Image content model ---------- 
 Fetching 'https://digital.grinnell.edu/islandora/object/grinnell:10737'... ...done.
-Screenshot saved at /screenshots/1-Digital Grinnell - Test the Basic Image content model.png
+Screenshot saved at /screenshots/1-Digital Grinnell - Admin User - Test the Basic Image content model.png
 
   Looking for CLASS of 'islandora-basic-image-content' in https://digital.grinnell.edu/islandora/object/grinnell:10737...
     Element with CLASS = 'islandora-basic-image-content' was found!
  
 Test the Binary content model ---------- 
 Fetching 'https://digital.grinnell.edu/islandora/object/grinnell:3246'... ...done.
-Screenshot saved at /screenshots/2-Digital Grinnell - Test the Binary content model.png
+Screenshot saved at /screenshots/2-Digital Grinnell - Admin User - Test the Binary content model.png
 
   Looking for LINK of 'A Data Set of Annotated Historical Maps' in https://digital.grinnell.edu/islandora/object/grinnell:3246...
     Element with LINK = 'A Data Set of Annotated Historical Maps' was found!
  
 Test the Book content model ---------- 
 Fetching 'https://digital.grinnell.edu/islandora/object/grinnell:5317'... ...done.
-Screenshot saved at /screenshots/3-Digital Grinnell - Test the Book content model.png
+Screenshot saved at /screenshots/3-Digital Grinnell - Admin User - Test the Book content model.png
 
   Looking for ID of 'BookReader' in https://digital.grinnell.edu/islandora/object/grinnell:5317...
     Element with ID = 'BookReader' was found!
  
 Test the Compound Object content model ---------- 
 Fetching 'https://digital.grinnell.edu/islandora/object/grinnell:5263'... ...done.
-Screenshot saved at /screenshots/4-Digital Grinnell - Test the Compound Object content model.png
+Screenshot saved at /screenshots/4-Digital Grinnell - Admin User - Test the Compound Object content model.png
 
   Looking for CLASS of 'islandora-compound-prev-next' in https://digital.grinnell.edu/islandora/object/grinnell:5263...
     Element with CLASS = 'islandora-compound-prev-next' was found!
     Element with CLASS = 'islandora-compound-prev-next' contains the target text of 'A compound of 2 objects'!
   Looking for XPATH of '/html/body/div[1]/div[1]/div[2]/div[1]/div/div/div[2]/div/div[2]/div/div/div/div/div[2]/span[@class="islandora-compound-caption"]' in https://digital.grinnell.edu/islandora/object/grinnell:5263...
-    Element with XPATH = '/html/body/div[1]/div[1]/div[2]/div[1]/div/div/div[2]/div/div[2]/div/div/div/div/div[2]/span[@class="islandora-compound-caption"]' was found!
-    Element with XPATH = '/html/body/div[1]/div[1]/div[2]/div[1]/div/div/div[2]/div/div[2]/div/div/div/div/div[2]/span[@class="islandora-compound-caption"]' contains the target text of 'Library Under Construction 2'!
+    Element with XPATH = '/html/body/div[1]/div[1]/div[2]/div[1]/div/div/div[2]/div/div[2]/div/div/div/div/div[2]/span[@class="islandora-compound-caption"]' was NOT found.
  
 Test the Large Image content model ---------- 
 Fetching 'https://digital.grinnell.edu/islandora/object/grinnell:5281'... ...done.
-Screenshot saved at /screenshots/5-Digital Grinnell - Test the Large Image content model.png
+Screenshot saved at /screenshots/5-Digital Grinnell - Admin User - Test the Large Image content model.png
 
   Looking for CLASS of 'islandora-large-image-content' in https://digital.grinnell.edu/islandora/object/grinnell:5281...
     Element with CLASS = 'islandora-large-image-content' was found!
@@ -53,7 +54,7 @@ Screenshot saved at /screenshots/5-Digital Grinnell - Test the Large Image conte
  
 Test the PDF content model ---------- 
 Fetching 'https://digital.grinnell.edu/islandora/object/grinnell:5272'... ...done.
-Screenshot saved at /screenshots/6-Digital Grinnell - Test the PDF content model.png
+Screenshot saved at /screenshots/6-Digital Grinnell - Admin User - Test the PDF content model.png
 
   Looking for CLASS of 'islandora-pdf-content' in https://digital.grinnell.edu/islandora/object/grinnell:5272...
     Element with CLASS = 'islandora-pdf-content' was found!
@@ -62,7 +63,7 @@ Screenshot saved at /screenshots/6-Digital Grinnell - Test the PDF content model
  
 Test the Video content model ---------- 
 Fetching 'https://digital.grinnell.edu/islandora/object/grinnell:4933'... ...done.
-Screenshot saved at /screenshots/7-Digital Grinnell - Test the Video content model.png
+Screenshot saved at /screenshots/7-Digital Grinnell - Admin User - Test the Video content model.png
 
   Looking for CLASS of 'islandora-video-content' in https://digital.grinnell.edu/islandora/object/grinnell:4933...
     Element with CLASS = 'islandora-video-content' was found!
@@ -71,7 +72,7 @@ Screenshot saved at /screenshots/7-Digital Grinnell - Test the Video content mod
  
 Test the Oral Histories content model ---------- 
 Fetching 'https://digital.grinnell.edu/islandora/object/grinnell:19396'... ...done.
-Screenshot saved at /screenshots/8-Digital Grinnell - Test the Oral Histories content model.png
+Screenshot saved at /screenshots/8-Digital Grinnell - Admin User - Test the Oral Histories content model.png
 
   Looking for CLASS of 'vjs-text-track-display' in https://digital.grinnell.edu/islandora/object/grinnell:19396...
     Element with CLASS = 'vjs-text-track-display' was found!
@@ -82,17 +83,16 @@ Screenshot saved at /screenshots/8-Digital Grinnell - Test the Oral Histories co
  
 Test the Solr search feature ---------- 
 Fetching 'https://digital.grinnell.edu/islandora/search/dc.title%3A%28Beowulf%29'... ...done.
-Screenshot saved at /screenshots/9-Digital Grinnell - Test the Solr search feature.png
+Screenshot saved at /screenshots/9-Digital Grinnell - Admin User - Test the Solr search feature.png
 
   Looking for XPATH of '/html/body/div[1]/div[1]/div[2]/div[1]/div/div/div[1]/article[2]/div/div/div/div/div[2]/div/div[2]/div/dl[2]/dd[2]' in https://digital.grinnell.edu/islandora/search/dc.title%3A%28Beowulf%29...
-    Element with XPATH = '/html/body/div[1]/div[1]/div[2]/div[1]/div/div/div[1]/article[2]/div/div/div/div/div[2]/div/div[2]/div/dl[2]/dd[2]' was found!
-    Element with XPATH = '/html/body/div[1]/div[1]/div[2]/div[1]/div/div/div[1]/article[2]/div/div/div/div/div[2]/div/div[2]/div/dl[2]/dd[2]' contains the target text of 'notes by Timothy D. Arner'!
+    Element with XPATH = '/html/body/div[1]/div[1]/div[2]/div[1]/div/div/div[1]/article[2]/div/div/div/div/div[2]/div/div[2]/div/dl[2]/dd[2]' was NOT found.
   Looking for LINK of 'Epic poetry, English (Old)' in https://digital.grinnell.edu/islandora/search/dc.title%3A%28Beowulf%29...
     Element with LINK = 'Epic poetry, English (Old)' was found!
  
 Test for our custom buttons ---------- 
 Fetching 'https://digital.grinnell.edu/islandora/object/grinnell:10470'... ...done.
-Screenshot saved at /screenshots/10-Digital Grinnell - Test for our custom buttons.png
+Screenshot saved at /screenshots/10-Digital Grinnell - Admin User - Test for our custom buttons.png
 
   Looking for LINK of 'Download' in https://digital.grinnell.edu/islandora/object/grinnell:10470...
     Element with LINK = 'Download' was found!
@@ -101,21 +101,20 @@ Screenshot saved at /screenshots/10-Digital Grinnell - Test for our custom butto
   Looking for SELECTOR of 'a#dg_coversheet_button' in https://digital.grinnell.edu/islandora/object/grinnell:10470...
     Element with SELECTOR = 'a#dg_coversheet_button' was found!
   Looking for XPATH of '/html/body/div[1]/div[1]/div[2]/div[1]/div/div/div[1]/article[2]/div/ul/li[3]/a' in https://digital.grinnell.edu/islandora/object/grinnell:10470...
-    Element with XPATH = '/html/body/div[1]/div[1]/div[2]/div[1]/div/div/div[1]/article[2]/div/ul/li[3]/a' was found!
+    Element with XPATH = '/html/body/div[1]/div[1]/div[2]/div[1]/div/div/div[1]/article[2]/div/ul/li[3]/a' was NOT found.
   Looking for XPATH of '/html/body/div[1]/div[1]/div[2]/div[1]/div/div/div[1]/article[2]/div/ul/li[4]/a' in https://digital.grinnell.edu/islandora/object/grinnell:10470...
-    Element with XPATH = '/html/body/div[1]/div[1]/div[2]/div[1]/div/div/div[1]/article[2]/div/ul/li[4]/a' was found!
+    Element with XPATH = '/html/body/div[1]/div[1]/div[2]/div[1]/div/div/div[1]/article[2]/div/ul/li[4]/a' was NOT found.
  
 Test for custom Solr search options ---------- 
 Fetching 'https://digital.grinnell.edu/islandora/object/grinnell:faulconer'... ...done.
-Screenshot saved at /screenshots/11-Digital Grinnell - Test for custom Solr search options.png
+Screenshot saved at /screenshots/11-Digital Grinnell - Admin User - Test for custom Solr search options.png
 
   Looking for XPATH of '/html/body/div[1]/div[1]/div[2]/div[1]/div/div/div[2]/div/div/div/div[2]/form/div/div[1]/div/div[1]/select/option[3]' in https://digital.grinnell.edu/islandora/object/grinnell:faulconer...
-    Element with XPATH = '/html/body/div[1]/div[1]/div[2]/div[1]/div/div/div[2]/div/div/div/div[2]/form/div/div[1]/div/div[1]/select/option[3]' was found!
-    Element with XPATH = '/html/body/div[1]/div[1]/div[2]/div[1]/div/div/div[2]/div/div/div/div[2]/form/div/div[1]/div/div[1]/select/option[3]' contains the target text of 'Artist'!
+    Element with XPATH = '/html/body/div[1]/div[1]/div[2]/div[1]/div/div/div[2]/div/div/div/div[2]/form/div/div[1]/div/div[1]/select/option[3]' was NOT found.
  
 Test for all top-level collections ---------- 
 Fetching 'https://digital.grinnell.edu/'... ...done.
-Screenshot saved at /screenshots/12-Digital Grinnell - Test for all top-level collections.png
+Screenshot saved at /screenshots/12-Digital Grinnell - Admin User - Test for all top-level collections.png
 
   Looking for CLASS of 'collection-banner-text' in https://digital.grinnell.edu/...
     Element with CLASS = 'collection-banner-text' was found!
@@ -137,7 +136,7 @@ Screenshot saved at /screenshots/12-Digital Grinnell - Test for all top-level co
  
 Test for 'Scholarship at Grinnell' sub-collections ---------- 
 Fetching 'https://digital.grinnell.edu/islandora/object/grinnell:scholarship'... ...done.
-Screenshot saved at /screenshots/13-Digital Grinnell - Test for 'Scholarship at Grinnell' sub-collections.png
+Screenshot saved at /screenshots/13-Digital Grinnell - Admin User - Test for 'Scholarship at Grinnell' sub-collections.png
 
   Looking for CLASS of 'collection-banner-text' in https://digital.grinnell.edu/islandora/object/grinnell:scholarship...
     Element with CLASS = 'collection-banner-text' was found!
@@ -154,7 +153,7 @@ Screenshot saved at /screenshots/13-Digital Grinnell - Test for 'Scholarship at 
  
 Test for 'Special Collections and Archives' sub-collections ---------- 
 Fetching 'https://digital.grinnell.edu/islandora/object/grinnell:special-collections'... ...done.
-Screenshot saved at /screenshots/14-Digital Grinnell - Test for 'Special Collections and Archives' sub-collections.png
+Screenshot saved at /screenshots/14-Digital Grinnell - Admin User - Test for 'Special Collections and Archives' sub-collections.png
 
   Looking for CLASS of 'collection-banner-text' in https://digital.grinnell.edu/islandora/object/grinnell:special-collections...
     Element with CLASS = 'collection-banner-text' was found!
@@ -165,6 +164,8 @@ Screenshot saved at /screenshots/14-Digital Grinnell - Test for 'Special Collect
     Element with LINK = 'G. W. Cook Correspondence, 1857-1860' was found!
   Looking for LINK of 'Grinnell College Buildings' in https://digital.grinnell.edu/islandora/object/grinnell:special-collections...
     Element with LINK = 'Grinnell College Buildings' was found!
+  Looking for LINK of 'Grinnell In China' in https://digital.grinnell.edu/islandora/object/grinnell:special-collections...
+    Element with LINK = 'Grinnell In China' was found!
   Looking for LINK of 'Historic Iowa Postcards' in https://digital.grinnell.edu/islandora/object/grinnell:special-collections...
     Element with LINK = 'Historic Iowa Postcards' was found!
   Looking for LINK of 'Jimmy Ley Collection' in https://digital.grinnell.edu/islandora/object/grinnell:special-collections...
@@ -183,7 +184,7 @@ Screenshot saved at /screenshots/14-Digital Grinnell - Test for 'Special Collect
  
 Test for 'Faulconer Art' sub-collections ---------- 
 Fetching 'https://digital.grinnell.edu/islandora/object/grinnell:faulconer'... ...done.
-Screenshot saved at /screenshots/15-Digital Grinnell - Test for 'Faulconer Art' sub-collections.png
+Screenshot saved at /screenshots/15-Digital Grinnell - Admin User - Test for 'Faulconer Art' sub-collections.png
 
   Looking for CLASS of 'collection-banner-text' in https://digital.grinnell.edu/islandora/object/grinnell:faulconer...
     Element with CLASS = 'collection-banner-text' was found!
@@ -200,7 +201,7 @@ Screenshot saved at /screenshots/15-Digital Grinnell - Test for 'Faulconer Art' 
  
 Test for 'Grinnell College Campus Collections' sub-collections ---------- 
 Fetching 'https://digital.grinnell.edu/islandora/object/grinnell:campus-collections'... ...done.
-Screenshot saved at /screenshots/16-Digital Grinnell - Test for 'Grinnell College Campus Collections' sub-collections.png
+Screenshot saved at /screenshots/16-Digital Grinnell - Admin User - Test for 'Grinnell College Campus Collections' sub-collections.png
 
   Looking for CLASS of 'collection-banner-text' in https://digital.grinnell.edu/islandora/object/grinnell:campus-collections...
     Element with CLASS = 'collection-banner-text' was found!
@@ -215,7 +216,7 @@ Screenshot saved at /screenshots/16-Digital Grinnell - Test for 'Grinnell Colleg
  
 Test for 'Social Justice at Grinnell' collection ---------- 
 Fetching 'https://digital.grinnell.edu/islandora/object/grinnell:social-justice'... ...done.
-Screenshot saved at /screenshots/17-Digital Grinnell - Test for 'Social Justice at Grinnell' collection.png
+Screenshot saved at /screenshots/17-Digital Grinnell - Admin User - Test for 'Social Justice at Grinnell' collection.png
 
   Looking for CLASS of 'collection-banner-text' in https://digital.grinnell.edu/islandora/object/grinnell:social-justice...
     Element with CLASS = 'collection-banner-text' was found!
@@ -230,7 +231,7 @@ Screenshot saved at /screenshots/17-Digital Grinnell - Test for 'Social Justice 
  
 Test for 'Poweshiek History Preservation Project' collection ---------- 
 Fetching 'https://digital.grinnell.edu/islandora/object/grinnell:phpp'... ...done.
-Screenshot saved at /screenshots/18-Digital Grinnell - Test for 'Poweshiek History Preservation Project' collection.png
+Screenshot saved at /screenshots/18-Digital Grinnell - Admin User - Test for 'Poweshiek History Preservation Project' collection.png
 
   Looking for CLASS of 'collection-banner-text' in https://digital.grinnell.edu/islandora/object/grinnell:phpp...
     Element with CLASS = 'collection-banner-text' was found!
@@ -245,7 +246,7 @@ Screenshot saved at /screenshots/18-Digital Grinnell - Test for 'Poweshiek Histo
  
 Test for 'Alumni Oral Histories' collection ---------- 
 Fetching 'https://digital.grinnell.edu/islandora/object/grinnell:alumni-oral-histories'... ...done.
-Screenshot saved at /screenshots/19-Digital Grinnell - Test for 'Alumni Oral Histories' collection.png
+Screenshot saved at /screenshots/19-Digital Grinnell - Admin User - Test for 'Alumni Oral Histories' collection.png
 
   Looking for CLASS of 'collection-banner-text' in https://digital.grinnell.edu/islandora/object/grinnell:alumni-oral-histories...
     Element with CLASS = 'collection-banner-text' was found!
@@ -258,11 +259,12 @@ Screenshot saved at /screenshots/19-Digital Grinnell - Test for 'Alumni Oral His
     Element with CLASS = 'awstats' was found!
     Element with CLASS = 'awstats' contains the target text of 'This content, grinnell:alumni-oral-histories, has been visited'!
 
-All 'Digital Grinnell' tests are complete with 87 passed and 0 failed.
+All 'Digital Grinnell - Admin User' tests are complete with 80 passed and 5 failed.
 
 ----------------
 Found '/tests/libweb_error_report_form.yml' in /tests.  Processing it now.
 Loading Firefox driver... ...done.
+Authentication is not specified.  Tests will run without login.
 Begin processing tests for 'LIBWEB Error Report Form' with a base URL of 'http://libweb.grinnell.edu/scripts/bugform.php'.
  
 Test Problem Form from Digital Grinnell ---------- 

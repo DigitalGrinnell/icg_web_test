@@ -9,13 +9,12 @@ mailgun_smtp_login = "Enter your 'Default SMTP Login' From Mailgun Dashboard her
 mailgun_default_password = "Enter the 'Default Password' from your Mailgun Dashboard here"
 notification_address = 'digital@grinnell.edu'
 #
-# Usernames and passwords for sites/tests which require authentication.
-# @TODO: As of 24-Jan-2018 no tests require authentication.
+# Passwords for sites/tests which require authentication.
+# @TODO: As of 2-Feb-2018 only the digital_grinnell_admin.yml tests require authentication.
 #
-authuser['digital.grinnell.edu'] =
-  { 'name': 'System Admin',           # username for any auth required tests
-    'pass': 'putYourPasswordHere' }   # be sure to edit in username's password here!
+# Passwords for sites/tests which require authentication.
 #
-authuser['libweb.grinnell.edu'] =
-  { 'name': 'System Admin',           # username for any auth required tests
-    'pass': 'putYourPasswordHere' }   # be sure to edit in username's password here!
+passwords = {
+  'digital.grinnell.edu': 'putPasswordHere',         # be sure to edit in username's password here!
+  'libweb.grinnell.edu': 'putPasswordHere',
+  }

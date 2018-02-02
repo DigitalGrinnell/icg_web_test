@@ -1,0 +1,205 @@
+---
+target:
+  site-description: 'Digital Grinnell - Admin User'   # this name is reported as a header in the output
+  base-url: 'https://digital.grinnell.edu'            # this is the base URL for all tests
+  authentication:                                     # if present, the following 4 fields are required
+    login-url: '/user/login'       # the address appended to base-url for authentication
+    username: 'System Admin'       # the username supplied to the user-input-id field
+    user-input-id: 'edit-name'     # id of the input field for username
+    pass-input-id: 'edit-pass'     # id of the input field for private.password
+    form-id: 'user-login'          # id of the form holding user-input-id and pass-input-id inputs
+
+  tests:
+
+# Test the content models
+
+    - description: 'Test the Audio content model'         # description of the test, for output only
+      url: '/islandora/object/grinnell:10942'             # the address appended to base-url for this test
+      match:                                              # list of class or id attributes to be matched in the output for a successful test
+        - id: 'mediaplayer'
+
+    - description: 'Test the Basic Image content model'
+      url: '/islandora/object/grinnell:10737'
+      match:
+        - class: 'islandora-basic-image-content'
+
+    - description: 'Test the Binary content model'
+      url: '/islandora/object/grinnell:3246'
+      match:
+        - link: 'A Data Set of Annotated Historical Maps'
+
+    - description: 'Test the Book content model'
+      url: '/islandora/object/grinnell:5317'
+      match:
+        - id: 'BookReader'
+
+    - description: 'Test the Compound Object content model'
+      url: '/islandora/object/grinnell:5263'
+      match:
+        - class:
+            attr: 'islandora-compound-prev-next'
+            text: 'A compound of 2 objects'
+        - xpath:
+            attr: '/html/body/div[1]/div[1]/div[2]/div[1]/div/div/div[2]/div/div[2]/div/div/div/div/div[2]/span[@class="islandora-compound-caption"]'
+            text: 'Library Under Construction 2'
+
+    - description: 'Test the Large Image content model'
+      url: '/islandora/object/grinnell:5281'
+      match:
+        - class: 'islandora-large-image-content'
+        - id: 'islandora-openseadragon'
+
+    - description: 'Test the PDF content model'
+      url: '/islandora/object/grinnell:5272'
+      match:
+        - class: 'islandora-pdf-content'
+        - class: 'pdf'
+
+    - description: 'Test the Video content model'
+      url: '/islandora/object/grinnell:4933'
+      match:
+        - class: 'islandora-video-content'
+        - id: 'mediaplayer'
+
+    - description: 'Test the Oral Histories content model'
+      url: '/islandora/object/grinnell:19396'
+      match:
+        - class: 'vjs-text-track-display'
+        - id: 'tiers-1'
+        - id: 'islandora_webform_object_tag_links'
+
+# Test some special features
+
+    - description: 'Test the Solr search feature'
+      url: '/islandora/search/dc.title%3A%28Beowulf%29'
+      match:
+        - xpath:
+            attr: '/html/body/div[1]/div[1]/div[2]/div[1]/div/div/div[1]/article[2]/div/div/div/div/div[2]/div/div[2]/div/dl[2]/dd[2]'
+            text: 'notes by Timothy D. Arner'
+        - link: 'Epic poetry, English (Old)'
+
+    - description: 'Test for our custom buttons'
+      url: '/islandora/object/grinnell:10470'
+      match:
+        - link: 'Download'
+        - selector: 'a#dg_annotation_button'
+        - selector: 'a#dg_coversheet_button'
+        - xpath: '/html/body/div[1]/div[1]/div[2]/div[1]/div/div/div[1]/article[2]/div/ul/li[3]/a'
+        - xpath: '/html/body/div[1]/div[1]/div[2]/div[1]/div/div/div[1]/article[2]/div/ul/li[4]/a'
+
+    - description: 'Test for custom Solr search options'
+      url: '/islandora/object/grinnell:faulconer'
+      match:
+        - xpath:
+            attr: '/html/body/div[1]/div[1]/div[2]/div[1]/div/div/div[2]/div/div/div/div[2]/form/div/div[1]/div/div[1]/select/option[3]'
+            text: "Artist"
+
+# Test for presence of all DG collections and sub-collections
+
+    - description: 'Test for all top-level collections'
+      url: '/'
+      match:
+        - class:
+            attr: 'collection-banner-text'
+            text: 'the preservation and publication of scholarship created by Grinnell College students, faculty, and staff, as well as selected material that illuminates the College'
+        - link: 'Scholarship at Grinnell'
+        - link: 'Special Collections and Archives'
+        - link: 'Faulconer Art'
+        - link: 'Grinnell College Campus Collections'
+        - link: 'Social Justice at Grinnell'
+        - link: 'Poweshiek History Preservation Project'
+        - link: 'Alumni Oral Histories'
+
+    - description: "Test for 'Scholarship at Grinnell' sub-collections"
+      url: '/islandora/object/grinnell:scholarship'
+      match:
+        - class:
+            attr: 'collection-banner-text'
+            text: 'Publications, research papers and posters, performance programs, and other materials'
+        - link: 'Student Scholarship'
+        - link: 'Faculty Scholarship'
+        - link: 'Syllabi and Curricular Materials'
+        - class:
+            attr: 'awstats'
+            text: 'This content, grinnell:scholarship, has been visited'
+
+    - description: "Test for 'Special Collections and Archives' sub-collections"
+      url: '/islandora/object/grinnell:special-collections'
+      match:
+        - class:
+            attr: 'collection-banner-text'
+            text: 'Special Collections and Archives, including photographs, letters, and documents.'
+        - link: 'Early College History'
+        - link: 'G. W. Cook Correspondence, 1857-1860'
+        - link: 'Grinnell College Buildings'
+        - link: 'Grinnell In China'          #  Not yet visible to all.
+        - link: 'Historic Iowa Postcards'
+        - link: 'Jimmy Ley Collection'
+        - link: 'Kleinschmidt Architectural History'
+        - link: 'Life at Grinnell College'
+        - link: 'Social Gospel'
+        - link: 'College Handbooks'
+        - class:
+            attr: 'awstats'
+            text: 'This content, grinnell:special-collections, has been visited'
+
+    - description: "Test for 'Faulconer Art' sub-collections"
+      url: '/islandora/object/grinnell:faulconer'
+      match:
+        - class:
+            attr: 'collection-banner-text'
+            text: 'The Faulconer Gallery, Grinnell College Art Collection includes over 4000 works of art, featuring works on paper (prints, drawings, and photographs), many in portfolios.'
+        - link: 'Recent Acquisitions'
+        - link: 'Soviet Graphic Art'
+        - link: 'Call a Wrecking Ball to Make a Window'
+        - class:
+            attr: 'awstats'
+            text: 'This content, grinnell:faulconer, has been visited'
+
+    - description: "Test for 'Grinnell College Campus Collections' sub-collections"
+      url: '/islandora/object/grinnell:campus-collections'
+      match:
+        - class:
+            attr: 'collection-banner-text'
+            text: 'Primary source materials from collections across campus.'
+        - link: 'Ancient Coins'
+        - link: 'Grinnell College Geology Collection'
+        - class:
+            attr: 'awstats'
+            text: 'This content, grinnell:campus-collections, has been visited'
+
+    - description: "Test for 'Social Justice at Grinnell' collection"
+      url: '/islandora/object/grinnell:social-justice'
+      match:
+        - class:
+            attr: 'collection-banner-text'
+            text: "Since its very earliest days, the faculty, students and staff of Grinnell College have been committed to the cause of social justice, a tradition that can be traced backed to the abolitionist views of the College's founders."
+        - link: 'John Brown Photograph'
+        - link: "John Brown's route across Iowa"
+        - class:
+            attr: 'awstats'
+            text: 'This content, grinnell:social-justice, has been visited'
+
+    - description: "Test for 'Poweshiek History Preservation Project' collection"
+      url: '/islandora/object/grinnell:phpp'
+      match:
+        - class:
+            attr: 'collection-banner-text'
+            text: "PHPP is a digital archive of the Poweshiek County area that includes materials contributed by individuals and items from the Drake Community Library, Grinnell College and area historical museums."
+        - link: "William Steele Sanders at Age 2"
+        - link: "Grinnell Train Depot"
+        - class:
+            attr: 'awstats'
+            text: 'This content, grinnell:phpp, has been visited'
+
+    - description: "Test for 'Alumni Oral Histories' collection"
+      url: '/islandora/object/grinnell:alumni-oral-histories'
+      match:
+        - class:
+            attr: 'collection-banner-text'
+            text: "The Alumni Oral History Project aims to better understand and share the history of Grinnell College by recording and preserving oral histories with members of the Grinnell College alumni community."
+        - link: "Audrey (Bunny) Howard Swanson '43"
+        - link: "David Durand '62"
+        - class:
+            attr: 'awstats'
+            text: 'This content, grinnell:alumni-oral-histories, has been visited'

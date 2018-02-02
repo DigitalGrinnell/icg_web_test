@@ -116,6 +116,56 @@ def clean_file_and_dispatch_notification(total_failed, completed_tests):
     raise
 
 
+def do_authentication(browser, auth, base_url):
+#  pp = pprint.PrettyPrinter(indent=2)
+#  pp.pprint(auth)
+
+  try:
+    username = auth['username']
+  except NameError:
+    print(c.FAIL + "Error: Authentication specified, but the reqiured 'username' element could not be found." + c.ENDC)
+    raise
+  try:
+    login_url = auth['login-url']
+  except NameError:
+    print(c.FAIL + "Error: Authentication specified, but the reqiured 'login-url' element could not be found." + c.ENDC)
+    raise
+  try:
+    uname_field = auth['user-input-id']
+  except NameError:
+    print(c.FAIL + "Error: Authentication specified, but the reqiured 'user-input-id' element could not be found." + c.ENDC)
+    raise
+  try:
+    passw_field = auth['pass-input-id']
+  except NameError:
+    print(c.FAIL + "Error: Authentication specified, but the reqiured 'pass-input-id' element could not be found." + c.ENDC)
+    raise
+  try:
+    login_form = auth['form-id']
+  except NameError:
+    print(c.FAIL + "Error: Authentication specified, but the reqiured 'form-id' element could not be found." + c.ENDC)
+    raise
+
+  full_url = base_url + login_url
+  print(c.OKBLUE + "Authentication as '{0}' at {1}...".format(username, full_url), end=' ')
+  browser.get(full_url)
+  stripped = base_url.split("://",2)[1]
+
+  ufield = browser.find_element_by_id(uname_field)
+  ufield.send_keys(username)
+  pfield = browser.find_element_by_id(passw_field)
+  try:
+    passw = private.passwords[stripped]
+  except NameError:
+    print(c.FAIL + "Error: Authentication specified, but no password is defined for '{0}'.".format(stripped) + c.ENDC)
+    raise
+  pfield.send_keys(passw)
+  form = browser.find_element_by_id(login_form)
+  form.submit( )
+  print("...successful." + c.ENDC)
+  print( )
+
+
 def do_match(driver, a_match, url):
 #  pp = pprint.PrettyPrinter(indent=2)
 #  pp.pprint(a_match)
@@ -174,12 +224,39 @@ def run_test(info_dict):
   driver, waiter, selector, datapath = init( )
   print("...done." + c.ENDC)
 
-  target = info_dict['target']
-  base_url = target['base-url']
-  site_description = target['site-description']
-  tests = target['tests']
+  try:
+    target = info_dict['target']
+  except NameError or KeyError:
+    print(c.FAIL + "Error: The reqiured 'target' element could not be found." + c.ENDC)
+    return 1
 
-  print(c.OKBLUE + "Begin processing tests for '{}' with a base URL of '{}'.".format(site_description, base_url) + c.ENDC)
+  try:
+    base_url = target['base-url']
+  except NameError or KeyError:
+    print(c.FAIL + "Error: The reqiured 'base-url' element could not be found." + c.ENDC)
+    return 1
+
+  try:
+    site_description = target['site-description']
+  except NameError or KeyError:
+    print(c.FAIL + "Error: The reqiured 'site-description' element could not be found." + c.ENDC)
+    return 1
+
+  # If authentication is reqiured...do it here.
+  try:
+    auth = target['authentication']
+  except:
+    print(c.OKBLUE + "Authentication is not specified.  Tests will run without login." + c.ENDC)
+  else:
+    do_authentication(driver, auth, base_url)
+
+  try:
+    tests = target['tests']
+  except NameError or KeyError:
+    print(c.FAIL + "Error: The reqiured 'tests' element could not be found." + c.ENDC)
+    return 1
+
+  print(c.OKBLUE + "Begin processing tests for '{0}' with a base URL of '{1}'.".format(site_description, base_url) + c.ENDC)
 
   for test in tests:
     description = test['description']
@@ -192,7 +269,7 @@ def run_test(info_dict):
       driver.get(full_url)
       print("...done." + c.OKBLUE)
       waiter.shoot(site_description + " - " + description)
-      print(c.ENDC),
+      print(c.ENDC)
 
       if 'fail' in test:
         print(c.FAIL + "Forced Failure!!!  {} ".format(test['fail']) + c.ENDC)
