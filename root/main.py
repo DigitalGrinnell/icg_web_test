@@ -56,6 +56,7 @@ def send_notification_via_smtp(m_text, num_failed):
   server.login(private.mailgun_smtp_login, private.mailgun_default_password)
   for a in private.notification_address.split(','):
     server.sendmail(private.mailgun_smtp_login, a.strip( ), message)
+    print(c.OKBLUE + "Failure notification email dispatched to {}.".format(a.strip( )) + c.ENDC)
   server.quit( )
 
 
@@ -107,9 +108,11 @@ def clean_file_and_dispatch_notification(total_failed, completed_tests):
       s.starttls( )
       s.ehlo( )
       s.login(private.mailgun_smtp_login, private.mailgun_default_password)
-      s.sendmail(private.mailgun_smtp_login, private.notification_address, composed)
+      for a in private.notification_address.split(','):
+        s.sendmail(private.mailgun_smtp_login, a.strip( ), composed)
+        print(c.OKBLUE + "Email summary dispatched to {}.".format(a.strip( )) + c.ENDC)
       s.close( )
-    print(c.OKBLUE + "A summary email has been dispatched!" + c.ENDC)
+    print(c.OKBLUE + "All summary emails have been dispatched!" + c.ENDC)
     print( )
   except:
     print(c.FAIL + "Unable to send the email. Error: " + c.ENDC, sys.exc_info()[0])
