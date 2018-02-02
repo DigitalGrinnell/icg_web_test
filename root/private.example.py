@@ -12,8 +12,6 @@ notification_address = 'digital@grinnell.edu'
 # Passwords for sites/tests which require authentication.
 # @TODO: As of 2-Feb-2018 only the digital_grinnell_admin.yml tests require authentication.
 #
-# Passwords for sites/tests which require authentication.
-#
 passwords = {
   'digital.grinnell.edu': 'putPasswordHere',         # be sure to edit in username's password here!
   'libweb.grinnell.edu': 'putPasswordHere',
