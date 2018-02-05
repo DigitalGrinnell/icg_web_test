@@ -155,17 +155,38 @@ def do_authentication(browser, auth, base_url):
   browser.get(full_url)
   stripped = base_url.split("://",2)[1]
 
-  ufield = browser.find_element_by_id(uname_field)
-  ufield.send_keys(username)
-  pfield = browser.find_element_by_id(passw_field)
+  try:
+    ufield = browser.find_element_by_id(uname_field)
+    ufield.send_keys(username)
+  except:
+    print(c.FAIL + "Authentication failed.  Could not find username field with ID of '{}'.".format(uname_field) + c.ENDC)
+    raise
+
+  try:
+    pfield = browser.find_element_by_id(passw_field)
+  except:
+    print(c.FAIL + "Authentication failed.  Could not find password field with ID of '{}'.".format(passw_field) + c.ENDC)
+    raise
+
   try:
     passw = private.passwords[stripped]
+    pfield.send_keys(passw)
   except NameError:
-    print(c.FAIL + "Error: Authentication specified, but no password is defined for '{0}'.".format(stripped) + c.ENDC)
+    print(c.FAIL + "Authentication failed. No password defined for '{0}'.".format(stripped) + c.ENDC)
     raise
-  pfield.send_keys(passw)
-  form = browser.find_element_by_id(login_form)
-  form.submit( )
+  except:
+    print(c.FAIL + "Authentication failed. ", sys.exc_info()[0])
+    print(c.ENDC)
+    raise
+
+  try:
+    form = browser.find_element_by_id(login_form)
+    form.submit( )
+  except:
+    print(c.FAIL + "Authentication failed. ", sys.exc_info()[0])
+    print(c.ENDC)
+    raise
+
   print("...successful." + c.ENDC)
   print( )
 
@@ -250,7 +271,8 @@ def run_test(info_dict):
   try:
     auth = target['authentication']
   except:
-    print(c.OKBLUE + "Authentication is not specified.  Tests will run without login." + c.ENDC)
+    print(c.OKBLUE + "Authentication is not specified.  Tests will run without login.")
+    print(c.ENDC)
   else:
     do_authentication(driver, auth, base_url)
 
