@@ -1,0 +1,12 @@
+---
+target:
+  site-description: 'Simple Google Test'                  # this name is reported as a header in the output
+  base-url: 'https://Google.com'                          # this is the base URL for all tests
+
+  tests:
+
+    - description: 'Google.com'
+      url: '/'
+      match:
+        - id: 'hplogo'
+
