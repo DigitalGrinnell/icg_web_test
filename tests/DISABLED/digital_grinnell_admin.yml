@@ -1,0 +1,32 @@
+---
+target:
+  site-description: 'Digital Grinnell - Admin User'   # this name is reported as a header in the output
+  base-url: 'https://digital.grinnell.edu'            # this is the base URL for all tests
+  authentication:                                     # if present, the following 4 fields are required
+    login-url: '/user/login'       # the address appended to base-url for authentication
+    username: 'System Admin'       # the username supplied to the user-input-id field
+    user-input-id: 'edit-name'     # id of the input field for username
+    pass-input-id: 'edit-pass'     # id of the input field for private.password
+    form-id: 'user-login'          # id of the form holding user-input-id and pass-input-id inputs
+
+  tests:
+
+# Most DG tests run in the public cases.  Here we only check what's different for admins.
+# Test for presence of restricted DG collections and sub-collections
+
+    - description: 'Test for all top-level collections'
+      url: '/'
+      match:
+        - link: 'Archives'
+
+    - description: "Test for 'Special Collections and Archives' sub-collections"
+      url: '/islandora/object/grinnell:special-collections'
+      match:
+        - link: 'Grinnell In China'          #  Not yet visible to all.
+
+    - description: "Test for 'Grinnell College Campus Collections' sub-collections"
+      url: '/islandora/object/grinnell:campus-collections'
+      match:
+        - link: 'Grinnell College Physics Museum Collection'
+        - link: 'Geology - Suppressed'
+
