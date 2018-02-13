@@ -5,8 +5,8 @@ This tool is based on work found in weihanwang/webdriver-python.  My copy reside
 ~~~
 git clone https://github.com/DigitalGrinnell/icg_web_test.git
 cd icg_web_test
-docker build –t "icg:icg_web_test" .  <-- Build a local image. Takes a couple minutes. Don't forget the period at the end!
-docker-compose run icg_web_test       <-- Run the icg_web_test portion of docker-compose.yml
+docker build -t icg_web_test .     <-- Build a local image. Takes a couple minutes. Don't forget the period at the end!
+docker-compose run icg_web_test    <-- Run the icg_web_test portion of docker-compose.yml
 ~~~
 
 You should see some output in your terminal window as the tests run against Digital Grinnell.
