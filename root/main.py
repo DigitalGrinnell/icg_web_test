@@ -9,6 +9,7 @@ import pprint
 import sys
 import os
 import smtplib
+import time
 
 from email import encoders
 from email.mime.base import MIMEBase
@@ -352,5 +353,11 @@ def parse_and_run_tests( ):
 # ------------------------------------------------------
 
 if __name__ == '__main__':
+
+  now = time.strftime("%c")
+  print("---------------------------")
+  print("icg_web_test - {0}".format(now))
+  print(" ")
+
   (total_failed, tests) = parse_and_run_tests( )
   clean_file_and_dispatch_notification(total_failed, tests)
