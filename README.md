@@ -1,6 +1,6 @@
-# icg_web_test 
+# icg_web_test
 
-This tool is based on work found in weihanwang/webdriver-python.  My copy resides in a fork at https://github.com/DigitalGrinnell/icg_web_test and you are certainly welcome to clone or fork this repo and give it a try.  There is much room for improvement in the code and in the Dockerization too.  Personally, I use this app for functional/regression testing of https://digital.grinnell.edu, as well as Grinnell's ISLE "Alpha" server, and elements of our LIBWEB server. You can spin-up the tool on any platform with Docker and git installed as so…
+This tool is based on work found in weihanwang/webdriver-python.  My copy resides in a fork at https://github.com/DigitalGrinnell/icg_web_test and you are certainly welcome to clone or fork this repo$
 
 ~~~
 git clone https://github.com/DigitalGrinnell/icg_web_test.git
@@ -11,11 +11,22 @@ docker-compose run icg_web_test    <-- Run the icg_web_test portion of docker-co
 
 You should see some output in your terminal window as the tests run against Digital Grinnell.
 
-If you would like to create tests of your own just make a copy of ./tests/digital_grinnell.yml and give your copy a different name.  The name can be anything you like, but the .yml extension is required and it must reside in the ./tests folder.  Edit your .yml file using my file as a guide.  It should be pretty self-explanatory.  If you leave my digital_grinnell.yml file in place it “should” run both my tests AND yours.  The code should run as many .yml test suites as it finds in ./tests.
+If you would like to create tests of your own just make a copy of ./tests/digital_grinnell_public.yml, or any other .yml file found in /tests or /tests/DISABLED, and give your copy a different name.  You may also find the /tests/DISABLED folder to be useful...you can move .yml files there to effectively "disable" them but also keep them as examples or for use at a later time.  
 
 This early version of the tool uses a Firefox browser and should create screenshot .png files in the ./screenshots folder.  I find these images to be very helpful too.
 
+At Grinnell, we run a daily suite of tests using a cron job on server DGDockerX, a CentOS 7 VM dedicated to running Docker.  The crontab entry in our case reads like this:
+
+~~~
+0 6 * * * /bin/bash -c '/usr/local/bin/docker-compose -f /home/mcfatem/Projects/Docker/icg_web_test/docker-compose.yml run icg_web_test'
+~~~
+
 The README.md contents of weihanwang's origial webdriver-python tool appears in its original form below.
+
+
+
+
+
 
 
 # webdriver-python
