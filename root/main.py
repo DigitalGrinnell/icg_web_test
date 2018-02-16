@@ -336,6 +336,11 @@ def parse_and_run_tests( ):
   original = sys.stdout
   sys.stdout = Tee(sys.stdout, f)   # print to both console and output file
 
+  now = time.strftime("%c")
+  print(c.BOLD + "----------------------------------------------------")
+  print("icg_web_test - {0}".format(now))
+  print(" " + c.ENDC)
+
   for yml in files:
     print("----------------")
     print("Found '{}' in /tests.  Processing it now.".format(yml))
@@ -353,11 +358,5 @@ def parse_and_run_tests( ):
 # ------------------------------------------------------
 
 if __name__ == '__main__':
-
-  now = time.strftime("%c")
-  print("---------------------------")
-  print("icg_web_test - {0}".format(now))
-  print(" ")
-
   (total_failed, tests) = parse_and_run_tests( )
   clean_file_and_dispatch_notification(total_failed, tests)
