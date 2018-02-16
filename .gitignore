@@ -1,5 +1,5 @@
 .idea
 **/.DS_Store
 private.py
-*.disabled
 /screenshots
+tests/*.txt
