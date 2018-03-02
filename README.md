@@ -1,6 +1,6 @@
 # icg_web_test
 
-This tool is based on work found in weihanwang/webdriver-python.  My copy resides in a fork at https://github.com/DigitalGrinnell/icg_web_test and you are certainly welcome to clone or fork this repo$
+This tool is based on work found in weihanwang/webdriver-python.  My copy resides in a fork at https://github.com/DigitalGrinnell/icg_web_test and you are certainly welcome to clone or fork this repo.
 
 ~~~
 git clone https://github.com/DigitalGrinnell/icg_web_test.git
