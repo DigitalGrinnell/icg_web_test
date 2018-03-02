@@ -193,16 +193,20 @@ def do_authentication(browser, auth, base_url):
 
 
 def do_match(driver, a_match, url):
-#  pp = pprint.PrettyPrinter(indent=2)
-#  pp.pprint(a_match)
+  # pp = pprint.PrettyPrinter(indent=2)
+  # pp.pprint(a_match)
 
   passed = failed = 0
 
   for mtyp, mattr in a_match.items( ):
     typ = mtyp
     if isinstance(mattr, dict):
-      attr = mattr['attr']
-      txt = mattr['text']
+      try:
+        attr = mattr['attr']
+        txt = mattr['text']
+      except:
+        print(c.FAIL + "    Match type '{0}' requires both 'attr' and 'text' elements.  One was NOT found.".format(typ.upper( )) + c.ENDC)
+        return 0,0
     else:
       attr = mattr
       txt = False
