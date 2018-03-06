@@ -19,6 +19,7 @@ from email.mime.multipart import MIMEMultipart
 
 
 class c:
+  HIGHLIGHT = '\033[96m'
   HEADER = '\033[95m'
   OKBLUE = '\033[94m'
   OKGREEN = '\033[92m'
@@ -297,8 +298,12 @@ def run_test(info_dict):
     print("Fetching '{}'...".format(full_url), end=' ')
 
     try:
+      start = int(round(time.time() * 1000))
       driver.get(full_url)
-      print("...done." + c.OKBLUE)
+      finish = int(round(time.time() * 1000))
+      totalTime = finish - start;
+      print("...done. " + c.ENDC + c.HIGHLIGHT)
+      print("  Total load time: {} milliseconds".format(totalTime) + c.OKBLUE)
       waiter.shoot(site_description + " - " + description)
       print(c.ENDC)
 
