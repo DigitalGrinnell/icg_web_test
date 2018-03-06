@@ -289,6 +289,7 @@ def run_test(info_dict):
     return 1
 
   print(c.OKBLUE + "Begin processing tests for '{0}' with a base URL of '{1}'.".format(site_description, base_url) + c.ENDC)
+  grandTotalTime = 0
 
   for test in tests:
     description = test['description']
@@ -302,6 +303,7 @@ def run_test(info_dict):
       driver.get(full_url)
       finish = int(round(time.time() * 1000))
       totalTime = finish - start;
+      grandTotalTime += totalTime
       print("...done. " + c.ENDC + c.HIGHLIGHT)
       print("  Total load time: {} milliseconds".format(totalTime) + c.OKBLUE)
       waiter.shoot(site_description + " - " + description)
@@ -324,7 +326,7 @@ def run_test(info_dict):
       num_failed += 1
       raise
 
-  msg = "All '{0}' tests are complete with {1} passed and {2} failed.".format(site_description, num_passed, num_failed)
+  msg = "All '{0}' tests are complete with {1} passed and {2} failed and total load time of " + c.HIGHLIGHT + "{3} milliseconds.".format(site_description, num_passed, num_failed, grandTotalTime)
   print(c.OKBLUE + c.HEADER)
   print(msg)
   print(c.ENDC)
