@@ -1,6 +1,6 @@
 # icg_web_test
 
-This tool is based on work found in weihanwang/webdriver-python.  My copy resides in a fork at https://github.com/DigitalGrinnell/icg_web_test and you are certainly welcome to clone or fork this repo.
+This tool is based on work found in weihanwang/webdriver-python.  My copy resides in a fork at https://github.com/DigitalGrinnell/icg_web_test and you are certainly welcome to clone or fork this repo$
 
 ~~~
 git clone https://github.com/DigitalGrinnell/icg_web_test.git
@@ -15,10 +15,10 @@ If you would like to create tests of your own just make a copy of ./tests/digita
 
 This early version of the tool uses a Firefox browser and should create screenshot .png files in the ./screenshots folder.  I find these images to be very helpful too.
 
-At Grinnell, we run a daily suite of tests using a cron job on server DGDockerX, a CentOS 7 VM dedicated to running Docker.  The crontab entry in our case reads like this:
+At Grinnell, we run a daily suite of tests using a root cron job on server DGDockerX, a CentOS 7 VM dedicated to running Docker.  The crontab entry in our case reads like this:
 
 ~~~
-0 6 * * * /bin/bash -c '/usr/local/bin/docker-compose -f /home/mcfatem/Projects/Docker/icg_web_test/docker-compose.yml run icg_web_test'
+0 6 * * * /bin/bash -c 'source /home/mcfatem/Projects/Docker/icg_web_test/cron.sh'
 ~~~
 
 The README.md contents of weihanwang's origial webdriver-python tool appears in its original form below.
