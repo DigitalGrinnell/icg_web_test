@@ -305,7 +305,7 @@ def run_test(info_dict):
       totalTime = finish - start;
       grandTotalTime += totalTime
       print("...done. " + c.ENDC + c.HIGHLIGHT)
-      print("  Total load time: {} milliseconds".format(totalTime) + c.OKBLUE)
+      print("  Total load time: {} seconds".format(totalTime/1000.) + c.OKBLUE)
       waiter.shoot(site_description + " - " + description)
       print(c.ENDC)
 
