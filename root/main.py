@@ -326,7 +326,8 @@ def run_test(info_dict):
       num_failed += 1
       raise
 
-  msg = "All '{0}' tests are complete with {1} passed and {2} failed and total load time of " + c.HIGHLIGHT + "{3} milliseconds.".format(site_description, num_passed, num_failed, grandTotalTime)
+  msg = "All '{0}' tests are complete with {1} passed and {2} failed and total load time of ".format(site_description, num_passed, num_failed)
+  msg += c.HIGHLIGHT + "{} seconds.".format(grandTotalTime/1000.)
   print(c.OKBLUE + c.HEADER)
   print(msg)
   print(c.ENDC)
