@@ -1,0 +1,47 @@
+---
+target:
+  site-description: 'Rootstalk - Public'         # this name is reported as a header in the output
+  base-url: 'https://rootstalk.grinnell.edu'            # this is the base URL for all tests
+
+# These tests run without login so 'authentication' is NOT defined
+#  authentication:                                     # if present, the following 4 fields are required
+#    login-url: '/user/login'       # the address appended to base-url for authentication
+#    username: 'System Admin'       # the username supplied to the user-input-id field
+#    user-input-id: 'edit-name'     # id of the input field for username
+#    pass-input-id: 'edit-pass'     # id of the input field for private.password
+#    form-id: 'user-login'          # id of the form holding user-input-id and pass-input-id inputs
+
+  tests:
+
+#    - description: 'Test that Search box is visible'      # description of the test, for output only
+#      url: '/issue/0'                                     # the address appended to base-url for this test
+#      match:                                              # list of class or id attributes to be matched in the output for a successful test
+#        - xpath:
+#            attr: '//*[@id="edit-keys"]'
+
+    - description: "Test for '2D & 3D Art' drop down filter"
+      url: '/issue/0'
+      match:
+        - link: '2D & 3D Art'
+
+#    - description: 'Test for back issue Fall 2016'
+#      url: '/past_issues'
+#      match:
+#        - xpath:
+#            attr: '/html/body/div/div/section/div/section/div/div/div/div[1]/span[3]/span/p'
+#            text: 'Fall 2016'
+
+#    - description: 'Test the Book content model'
+#      url: '/islandora/object/grinnell:5317'
+#      match:
+#        - id: 'BookReader'
+#
+#    - description: 'Test the Compound Object content model'
+#      url: '/islandora/object/grinnell:5263'
+#      match:
+#        - class:
+#            attr: 'islandora-compound-prev-next'
+#            text: 'A compound of 2 objects'
+#        - xpath:
+#            attr: '/html/body/div[1]/div[1]/div[2]/div[1]/div/div/div[2]/div/div[2]/div/div/div/div/div[2]/span[@class="islandora-compound-caption"]'
+#            text: 'Library Under Construction 2'
