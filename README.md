@@ -6,12 +6,18 @@ This tool is based on work found in weihanwang/webdriver-python.  My copy reside
 git clone https://github.com/DigitalGrinnell/icg_web_test.git
 cd icg_web_test
 docker build -t icg_web_test .     <-- Build a local image. Takes a couple minutes. Don't forget the period at the end!
-docker-compose run icg_web_test    <-- Run the icg_web_test portion of docker-compose.yml
+docker-compose run icg_web_test    <-- Run the icg_web_test portion of docker-compose.yml for all /tests/*.yml files.
 ~~~
 
 You should see some output in your terminal window as the tests run against Digital Grinnell.
 
-If you would like to create tests of your own just make a copy of ./tests/digital_grinnell_public.yml, or any other .yml file found in /tests or /tests/DISABLED, and give your copy a different name.  You may also find the /tests/DISABLED folder to be useful...you can move .yml files there to effectively "disable" them but also keep them as examples or for use at a later time.  
+If you would like to create tests of your own just make a copy of ./tests/digital_grinnell_public.yml, or any other .yml file found in /tests or /tests/DISABLED, and give your copy a different name.  You may also find the /tests/DISABLED folder to be useful...you can move .yml files there to effectively "disable" them but also keep them as examples or for use at a later time.
+
+You may also run a single .yml file by specifying a TEST=*path* environment variable with the 'docker-compose run' command, simialr to the following:
+
+    docker-compose run -e TEST='/tests/DISABLED/Google.yml' icg_web_test
+
+Note that when using this option the file(s) specified by TEST must be accessible within the icg_web_test container, as are all files inside the /tests directory and its subordinates.
 
 This early version of the tool uses a Firefox browser and should create screenshot .png files in the ./screenshots folder.  I find these images to be very helpful too.
 

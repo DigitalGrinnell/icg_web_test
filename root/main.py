@@ -343,7 +343,9 @@ def parse_and_run_tests( ):
   total_failed = 0
   tests = ''
 
-  files = glob.glob('/tests/*.yml')
+  spec = os.environ.get('TEST', '/tests/*.yml')
+  files = glob.glob(spec)
+
   f = open('/tests/raw.out', 'w')
   original = sys.stdout
   sys.stdout = Tee(sys.stdout, f)   # print to both console and output file
@@ -355,7 +357,7 @@ def parse_and_run_tests( ):
 
   for yml in files:
     print("----------------")
-    print("Found '{}' in /tests.  Processing it now.".format(yml))
+    print("Found '{0}' in {1}.  Processing it now.".format(yml, spec))
     tests += '\n\t{}'.format(yml)
 
     with open(yml) as info:
