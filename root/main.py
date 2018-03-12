@@ -56,7 +56,9 @@ def send_notification_via_smtp(m_text, num_failed):
   server = smtplib.SMTP('smtp.mailgun.org', 587)
   server.starttls( )
   server.login(private.mailgun_smtp_login, private.mailgun_default_password)
-  for a in private.notification_address.split(','):
+
+  notify = os.environ.get('NOTIFY', private.notification_address)
+  for a in notify.split(','):
     server.sendmail(private.mailgun_smtp_login, a.strip( ), message)
     print(c.OKBLUE + "Failure notification email dispatched to {}.".format(a.strip( )) + c.ENDC)
   server.quit( )
@@ -110,7 +112,9 @@ def clean_file_and_dispatch_notification(total_failed, completed_tests):
       s.starttls( )
       s.ehlo( )
       s.login(private.mailgun_smtp_login, private.mailgun_default_password)
-      for a in private.notification_address.split(','):
+
+      notify = os.environ.get('NOTIFY', private.notification_address)
+      for a in notify.split(','):
         s.sendmail(private.mailgun_smtp_login, a.strip( ), composed)
         print(c.OKBLUE + "Email summary dispatched to {}.".format(a.strip( )) + c.ENDC)
       s.close( )

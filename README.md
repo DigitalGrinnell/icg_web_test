@@ -13,9 +13,9 @@ You should see some output in your terminal window as the tests run against Digi
 
 If you would like to create tests of your own just make a copy of ./tests/digital_grinnell_public.yml, or any other .yml file found in /tests or /tests/DISABLED, and give your copy a different name.  You may also find the /tests/DISABLED folder to be useful...you can move .yml files there to effectively "disable" them but also keep them as examples or for use at a later time.
 
-#### Environment Options (Variables)
+#### Environment Variable Options  
 
-icg_web_test resoponds to two optional environment varaibles/settings.
+icg_web_test responds to three optional environment variables/settings.
 
 **-e TEST** - You may also run a single .yml file or 'glob' of files by specifying a TEST=*path* environment variable with the 'docker-compose run' command, similar to the following:
 
@@ -37,10 +37,13 @@ or
     docker-compose run -e TEST='/tests/digital_grinnell_public.yml' -e BASE_URL='https://isle-dev.localdomain' icg_web_test
 
 
-The first example would run all /tests/*.yml test files but with a base URL of 'https://microsoft.com' instead of whatever is specified inside each *.yml file.
+The first example would run all /tests/\*.yml test files but with a base URL of 'https://microsoft.com' instead of whatever is specified inside each \*.yml file.
 
 The second example would run the tests prescribed for Digital Grinnell - Public, but against an isle-dev.localdomain host instance of ISLE.
 
+**-e NOTIFY** - You may override the *notification_address* portion of your private.py file, the email address(es) to which failure and/or success notifications are dispatched, using an environment spec similar to the following:
+
+    docker-compose run -e NOTIFY='john@doe.edu, jane@doe.edu' icg_web_test
 
 #### Firefox and Screenshots
 
