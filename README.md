@@ -49,13 +49,15 @@ The second example would run the tests prescribed for Digital Grinnell - Public,
 
 This early version of the tool uses a Firefox browser and should create screenshot .png files in the ./screenshots folder.  I find these images to be very helpful too.
 
+#### Cron
+
 At Grinnell, we run a daily suite of tests using a root cron job on server DGDockerX, a CentOS 7 VM dedicated to running Docker.  The crontab entry in our case reads like this:
 
 ~~~
 0 6 * * * /bin/bash -c 'source /home/mcfatem/Projects/Docker/icg_web_test/cron.sh'
 ~~~
 
-The README.md contents of weihanwang's origial webdriver-python tool appears in its original form below.
+*The README.md contents of weihanwang's origial webdriver-python tool appears in its original form below.*
 
 
 
