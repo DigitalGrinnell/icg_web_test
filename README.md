@@ -13,11 +13,36 @@ You should see some output in your terminal window as the tests run against Digi
 
 If you would like to create tests of your own just make a copy of ./tests/digital_grinnell_public.yml, or any other .yml file found in /tests or /tests/DISABLED, and give your copy a different name.  You may also find the /tests/DISABLED folder to be useful...you can move .yml files there to effectively "disable" them but also keep them as examples or for use at a later time.
 
-You may also run a single .yml file by specifying a TEST=*path* environment variable with the 'docker-compose run' command, simialr to the following:
+#### Environment Options (Variables)
+
+icg_web_test resoponds to two optional environment varaibles/settings.
+
+**-e TEST** - You may also run a single .yml file or 'glob' of files by specifying a TEST=*path* environment variable with the 'docker-compose run' command, similar to the following:
 
     docker-compose run -e TEST='/tests/DISABLED/Google.yml' icg_web_test
 
+or
+
+    docker-compose run -e TEST='/tests/DISABLED/Digital*.yml' icg_web_test
+
+
 Note that when using this option the file(s) specified by TEST must be accessible within the icg_web_test container, as are all files inside the /tests directory and its subordinates.
+
+**-e BASE_URL** - You may override the base URL specified in the selected YAML file(s) using an environment spec similar to the following:
+
+    docker-compose run -e BASE_URL='https://microsoft.com' icg_web_test
+
+or
+
+    docker-compose run -e TEST='/tests/digital_grinnell_public.yml' -e BASE_URL='https://isle-dev.localdomain' icg_web_test
+
+
+The first example would run all /tests/*.yml test files but with a base URL of 'https://microsoft.com' instead of whatever is specified inside each *.yml file.
+
+The second example would run the tests prescribed for Digital Grinnell - Public, but against an isle-dev.localdomain host instance of ISLE.
+
+
+#### Firefox and Screenshots
 
 This early version of the tool uses a Firefox browser and should create screenshot .png files in the ./screenshots folder.  I find these images to be very helpful too.
 

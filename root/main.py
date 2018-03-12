@@ -262,7 +262,9 @@ def run_test(info_dict):
     return 1
 
   try:
-    base_url = target['base-url']
+    base = target['base-url']
+    base_url = os.environ.get('BASE_URL', base)
+
   except NameError or KeyError:
     print(c.FAIL + "Error: The reqiured 'base-url' element could not be found." + c.ENDC)
     return 1
