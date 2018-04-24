@@ -1,6 +1,6 @@
 FROM python:3.5
 
-MAINTAINER Weihan Wang
+MAINTAINER Mark McFate
 
 # Install Firefox
 RUN \
