@@ -7,6 +7,7 @@ target:
 
     - description: 'Test Problem Form from Digital Grinnell'
       url: '?system=2&url=https%3A%2F%2Fdigital.grinnell.edu%2Fislandora%2Fobject%2Fgrinnell%3A13909'
+      delay: 5
       match:
         - id: 'websupportform'
         - xpath:

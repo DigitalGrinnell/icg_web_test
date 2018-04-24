@@ -1,9 +1,9 @@
 ---
 target:
-  site-description: 'Rootstalk - Public'         # this name is reported as a header in the output
+  site-description: 'Rootstalk - Public'   # this name is reported as a header in the output
   base-url: 'https://rootstalk.grinnell.edu'            # this is the base URL for all tests
 
-# These tests run without login so 'authentication' is NOT defined
+# These tests run without login so 'aunthentication' is NOT defined
 #  authentication:                                     # if present, the following 4 fields are required
 #    login-url: '/user/login'       # the address appended to base-url for authentication
 #    username: 'System Admin'       # the username supplied to the user-input-id field
@@ -13,35 +13,126 @@ target:
 
   tests:
 
-#    - description: 'Test that Search box is visible'      # description of the test, for output only
-#      url: '/issue/0'                                     # the address appended to base-url for this test
-#      match:                                              # list of class or id attributes to be matched in the output for a successful test
-#        - xpath:
-#            attr: '//*[@id="edit-keys"]'
+# Test the home page
 
-    - description: "Test for '2D & 3D Art' drop down filter"
+    - description: 'Test that banner is visible'           # description of the test, for output only
+      url: '/'                                             # the address appended to base-url for this test
+      match:                                               # list of class or id attributes to be matched in the output for a successful test
+        - selector: '.logo > img:nth-child(1)'
+
+    - description: 'Test that the Search box is visible'
       url: '/issue/0'
       match:
-        - link: '2D & 3D Art'
-
-#    - description: 'Test for back issue Fall 2016'
-#      url: '/past_issues'
+        - selector:
+            attr: '.button > span:nth-child(1)'
+            text: 'Search'
+        - id: 'edit-keys'
+#
+#    - description: 'Test for custom Solr search options'
+#      url: '/islandora/object/grinnell:faulconer'
 #      match:
 #        - xpath:
-#            attr: '/html/body/div/div/section/div/section/div/div/div/div[1]/span[3]/span/p'
-#            text: 'Fall 2016'
-
-#    - description: 'Test the Book content model'
-#      url: '/islandora/object/grinnell:5317'
-#      match:
-#        - id: 'BookReader'
+#            attr: '/html/body/div[1]/div[1]/div[2]/div[1]/div/div/div[2]/div/div/div/div[2]/form/div/div[1]/div/div[1]/select/option[3]'
+#            text: "Artist"
 #
-#    - description: 'Test the Compound Object content model'
-#      url: '/islandora/object/grinnell:5263'
+#
+#    - description: 'Test for all top-level collections'
+#      url: '/'
 #      match:
 #        - class:
-#            attr: 'islandora-compound-prev-next'
-#            text: 'A compound of 2 objects'
-#        - xpath:
-#            attr: '/html/body/div[1]/div[1]/div[2]/div[1]/div/div/div[2]/div/div[2]/div/div/div/div/div[2]/span[@class="islandora-compound-caption"]'
-#            text: 'Library Under Construction 2'
+#            attr: 'collection-banner-text'
+#            text: 'the preservation and publication of scholarship created by Grinnell College students, faculty, and staff, as well as selected material that illuminates the College'
+#        - link: 'Scholarship at Grinnell'
+#        - link: 'Special Collections and Archives'
+#        - link: 'Faulconer Art'
+#        - link: 'Grinnell College Campus Collections'
+#        - link: 'Social Justice at Grinnell'
+#        - link: 'Poweshiek History Preservation Project'
+#        - link: 'Alumni Oral Histories'
+
+# Test to see if pdf's are loading and the pdf links are being displayed
+
+    - description: 'Test that pdf links are visible'
+      url: '/article/premiere-edition-rootstalk-our-prairie-journal-podcast'
+      match:
+        - selector: 'body > div > div > section > div > article > div > div.field.field--name-field-downloadable-content.field--type-file.field--label-above > div.field__items > div:nth-child(1) > span > span.file-link > a'
+
+    - description: 'Test to see that embedded links are visible'
+      url: '/article/premiere-edition-rootstalk-our-prairie-journal-podcast'
+      match:
+          - selector: 'body > div > div > section > div > article > div > div.field.field--name-field-embedded-links.field--type-link.field--label-above > div.field__items > div:nth-child(1) > a'
+
+    - description: 'Test to check that facebook button is visible'
+      url: '/'
+      match:
+          - selector: '#block-socialmediamenu > ul > li:nth-child(2) > a'
+
+    - description: 'Test to check that twitter button is visible'
+      url: '/'
+      match:
+          - selector: '#block-socialmediamenu > ul > li:nth-child(1) > a'
+
+    - description: 'Test to check that the "Current Issue" link is available'
+      url: '/'
+      match:
+          - link: 'Current Issue'
+
+    - description: 'Test to check that the "Past Issues" link is available'
+      url: '/'
+      match:
+          - link: 'Past Issues'
+
+    - description: 'Test to check that the "About Us" link is available'
+      url: '/'
+      match:
+          - link: 'About Us'
+
+    - description: 'Test to check that the "How to Submit" link is available'
+      url: '/'
+      match:
+          - link: 'How to Submit'
+
+    - description: 'Test to check if the "Contact" link is available'
+      url: '/'
+      match:
+          - link: 'Contact'
+
+    - description: 'Test to see if the login link is available'
+      url: '/'
+      match:
+          - link: 'Log in'
+
+    - description: 'Test to see if the pdf is being loaded when viewing the article'
+      url: '/article/premiere-edition-rootstalk-our-prairie-journal-podcast'
+      match:
+        - selector: '#pdf-pages-0 > canvas'
+
+    - description: 'Test the visibility of the "Prairie Arts" dropdown'
+      url: '/'
+      match:
+          - link: 'Prairie Arts'
+
+    - description: 'Test the visibility of the "Prairie Culture" dropdown'
+      url: '/'
+      match:
+          - link: 'Prairie Culture'
+
+    - description: 'Test the visibility of the "Prairie Science" dropdown'
+      url: '/'
+      match:
+          - link: 'Prairie Science'
+
+    - description: 'Test the visibility of the "Other" dropdown'
+      url: '/'
+      match:
+          - link: 'Other'
+
+    - description: 'Test the visibility of the "Contact Us" link'
+      url: '/'
+      match:
+          - link: 'Contact Us'
+
+    - description: 'Test to see if the mission statement is visible'
+      url: '/about_us'
+      match:
+          - selector: '#block-bootstrap-rootstalk-ourmission'

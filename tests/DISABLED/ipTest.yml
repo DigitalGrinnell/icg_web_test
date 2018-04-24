@@ -7,6 +7,6 @@ target:
 
     - description: 'Google.com'
       url: '/'
+      delay: 5
       match:
         - id: 'hplogo'
-

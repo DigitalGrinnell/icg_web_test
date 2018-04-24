@@ -1,0 +1,28 @@
+---
+target:
+  site-description: 'DGAdmin'   # this name is reported as a header in the output
+  base-url: 'https://dgadmin.grinnell.edu'            # this is the base URL for all tests
+  authentication:                                     # if present, the following 4 fields are required
+    login-url: '/user/login'       # the address appended to base-url for authentication
+    username: 'System Admin'       # the username supplied to the user-input-id field
+    user-input-id: 'edit-name'     # id of the input field for username
+    pass-input-id: 'edit-pass'     # id of the input field for private.password
+    form-id: 'user-login'          # id of the form holding user-input-id and pass-input-id inputs
+
+  tests:
+
+# The following tests, implemented in the "adding-control" branch of the code,
+# check some 'back-end' Islandora functions on the DGAdmin server.
+
+# Specifically they will attempt to ingest and then inspect/query new content.
+
+    - description: "Ingest a large image (TIFF) object into the grinnell:test collection"
+      url: '/islandora/object/grinnell:test'
+      actions:
+        click: 'Manage'
+        click: 'Add an object to this collection'
+        select: 'edit-models'
+        option: 'Islandora Large Image Content Model'
+        form:
+          - id: 'islandora-ingest-form'
+            submit:

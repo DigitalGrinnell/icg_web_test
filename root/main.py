@@ -125,6 +125,9 @@ def clean_file_and_dispatch_notification(total_failed, completed_tests):
     print( )
     raise
 
+## Key functions begin here.  Utilities are above.
+
+# do_authentication - Performs authentication using credentials in 'auth'
 
 def do_authentication(browser, auth, base_url):
 #  pp = pprint.PrettyPrinter(indent=2)
@@ -196,6 +199,8 @@ def do_authentication(browser, auth, base_url):
   print("...successful." + c.ENDC)
   print( )
 
+# do_match - Responds to a 'match' directive and elements that may follow it including:
+#   xpath, class, id, link, and selector.
 
 def do_match(driver, a_match, url):
   # pp = pprint.PrettyPrinter(indent=2)
@@ -250,6 +255,68 @@ def do_match(driver, a_match, url):
 
   return passed, failed
 
+# do_action - Responds to an 'actions' directive and elements that may follow it including:
+#   click, select, option, and form.   @TODO...working here on 20-Apr-2018.
+
+def do_action(driver, action, url):
+  # pp = pprint.PrettyPrinter(indent=2)
+  # pp.pprint(action)
+
+  passed = failed = 0
+
+  """
+  for mtyp, mattr in a_match.items( ):
+    typ = mtyp
+    if isinstance(mattr, dict):
+      try:
+        attr = mattr['attr']
+        txt = mattr['text']
+      except:
+        print(c.FAIL + "    Match type '{0}' requires both 'attr' and 'text' elements.  One was NOT found.".format(typ.upper( )) + c.ENDC)
+        return 0,0
+    else:
+      attr = mattr
+      txt = False
+
+    print(c.OKBLUE + "  Looking for {2} of '{0}' in {1}...".format(attr, url, typ.upper( )) + c.ENDC)
+    found = False
+
+    try:
+      if (typ == 'xpath'):
+        found = driver.find_element_by_xpath(attr)
+      elif (typ == 'class'):
+        found = driver.find_element_by_class_name(attr)
+      elif (typ == 'id'):
+        found = driver.find_element_by_id(attr)
+      elif (typ == 'link'):
+        found = driver.find_element_by_partial_link_text(attr)
+      elif (typ == 'selector'):
+        found = driver.find_element_by_css_selector(attr)
+      else:
+        print(c.FAIL + "Check your .yml file.  Match type '{}' is not supported.".format(typ) + c.ENDC)
+        return 0,0
+    except:
+      print(c.FAIL + "    Element with {1} = '{0}' was NOT found.".format(attr, typ.upper( )) + c.ENDC)
+      failed += 1
+
+    if found:
+      print(c.OKGREEN + "    Element with {1} = '{0}' was found!".format(attr, typ.upper( )) + c.ENDC)
+      passed += 1
+      if txt:
+        if txt in found.text:
+          print(c.OKGREEN + "    Element with {2} = '{0}' contains the target text of '{1}'!".format(attr, txt, typ.upper( )) + c.ENDC)
+          passed += 1
+        else:
+          print(c.FAIL + "    Element with {2} = '{0}' does NOT contain the target text of '{1}'.".format(attr, txt, typ.upper( )) + c.ENDC)
+          failed += 1
+
+  """
+
+  return passed, failed
+
+
+# run_test - Called in response to a single .yml test file.  Takes care of authentication, if
+#   necessary, and loops through all of the included '- description' tests.
 
 def run_test(info_dict):
   num_passed = passed = 0
@@ -297,6 +364,8 @@ def run_test(info_dict):
   print(c.OKBLUE + "Begin processing tests for '{0}' with a base URL of '{1}'.".format(site_description, base_url) + c.ENDC)
   grandTotalTime = 0
 
+  # Loop on all the '- description' individual tests.
+
   for test in tests:
     description = test['description']
     full_url = base_url + test['url']
@@ -315,13 +384,34 @@ def run_test(info_dict):
       waiter.shoot(site_description + " - " + description)
       print(c.ENDC)
 
+      # Check for a 'fail' directive.
+
       if 'fail' in test:
         print(c.FAIL + "Forced Failure!!!  {} ".format(test['fail']) + c.ENDC)
         num_failed += 1
 
-      elif 'match' in test:
+      # Check for a 'delay' directive.  If found, wait the specified number of seconds before proceeding.
+
+      if 'delay' in test:
+        seconds = test['delay']
+        print(c.OKBLUE + "  Imposing a specified {} second delay...".format(seconds), end=' ')
+        time.sleep(seconds)
+        print("...done. ")
+        print(c.ENDC)
+
+      # Check for a 'match' directive.
+
+      if 'match' in test:
         for a_match in test['match']:
           (passed, failed) = do_match(driver, a_match, full_url)
+          num_passed += passed
+          num_failed += failed
+
+      # Check for an 'actions' directive.
+
+      if 'actions' in test:
+        for action in test['actions']:
+          (passed, failed) = do_action(driver, action, full_url)
           num_passed += passed
           num_failed += failed
 
@@ -344,6 +434,8 @@ def run_test(info_dict):
 
   return num_failed
 
+# parse_and_run_tests - Does just what it says... looks for /tests/*.yml files and
+#   it processes them one-at-a-time.
 
 def parse_and_run_tests( ):
   total_failed = 0
