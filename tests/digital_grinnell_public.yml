@@ -201,7 +201,8 @@ target:
             attr: 'collection-banner-text'
             text: "The Alumni Oral History Project aims to better understand and share the history of Grinnell College by recording and preserving oral histories with members of the Grinnell College alumni community."
         - link: "Audrey (Bunny) Howard Swanson '43"
-        - link: "David Durand '62"
+        - link: "Edward Shackelford '43"
+#        - link: "David Durand '62"   # No longer on the front page.  Need a search test here instead
         - class:
             attr: 'awstats'
             text: 'This content, grinnell:alumni-oral-histories, has been visited'
